@@ -1,0 +1,12 @@
+.border 
+{
+	border: 1px solid #dedede;
+}
+.btn
+{
+	border-radius:  0 !important;
+}
+.btn:focus
+{
+	outline: none !important;
+}
