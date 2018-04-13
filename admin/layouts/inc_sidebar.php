@@ -11,31 +11,37 @@
                 <a href="#"><i class="fa fa-circle text-success"></i> Online</a>
             </div>
         </div>
-        <!-- search form -->
-        <form action="#" method="get" class="sidebar-form">
-            <div class="input-group">
-                <input type="text" name="q" class="form-control" placeholder="Search...">
-                <span class="input-group-btn">
-                <button type="submit" name="search" id="search-btn" class="btn btn-flat"><i class="fa fa-search"></i>
-                </button>
-                </span>
-            </div>
-        </form>
-        <!-- /.search form -->
         <!-- sidebar menu: : style can be found in sidebar.less -->
         <ul class="sidebar-menu" data-widget="tree">
             <li class="header">MAIN NAVIGATION</li>
             <li class="">
-                <a href=""><i class="fa fa-dashboard"></i> <span>Home</span></a>
+                <a href="/admin"><i class="fa fa-dashboard"></i> <span>Home</span></a>
+            </li>
+             <li class="<?= isset($modules) && $modules == 'users' ? 'active' : ''?>">
+                <a href="/admin/modules/users/"><i class="fa fa-user"></i> <span>Thành viên</span></a>
+            </li>
+            <li class="header"> Bài viết </li>
+<!--            <li class="--><?//= isset($modules) && $modules == 'cate-posts' ? 'active' : ''?><!--">-->
+<!--                <a href="/admin/modules/cate-posts"><i class="fa fa-list"></i> <span>Danh mục</span></a>-->
+<!--            </li>-->
+            <li class="<?= isset($modules) && $modules == 'posts' ? 'active' : ''?>">
+                <a href="/admin/modules/posts"><i class="fa fa-book"></i> <span>Bài viết</span></a>
+            </li>
+            <li class="header"> Sản phẩm  </li>
+            <li class="<?= isset($modules) && $modules == 'cate-products' ? 'active' : ''?>">
+                <a href="/admin/modules/cate-products"><i class="fa fa-list"></i> <span>Danh mục</span></a>
+            </li>
+            <li class="<?= isset($modules) && $modules == 'products' ? 'active' : ''?>">
+                <a href="/admin/modules/products"><i class="fa fa-book"></i> <span>Sản phẩm</span></a>
+            </li>
+            <li class="<?= isset($modules) && $modules == 'transactions' ? 'active' : ''?>">
+                <a href="/admin/modules/transactions"><i class="fa fa-book"></i> <span> Đơn hàng </span></a>
+            </li>
+            <li class="<?= isset($modules) && $modules == 'warehouses' ? 'active' : ''?>">
+                <a href="/admin/modules/warehouses"><i class="fa fa-book"></i> <span> Quản lý kho </span></a>
             </li>
             <li class="">
-                <a href="/public/admin/news/tags"><i class="fa fa-tags"></i> <span>Tags</span></a>
-            </li>
-            <li class="active">
-                <a href="/public/admin/news/categorys"><i class="fa fa-list"></i> <span>Danh mục</span></a>
-            </li>
-            <li class="">
-                <a href="/public/admin/news/posts"><i class="fa fa-book"></i> <span>Bài viết</span></a>
+                <a href="/admin/modules/modules"><i class="fa fa-book"></i> <span>Modules</span></a>
             </li>
         </ul>
     </section>

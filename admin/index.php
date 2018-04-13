@@ -1,197 +1,214 @@
 <?php
-	require_once __DIR__ .'/autoload.php';
+    require_once __DIR__ .'/autoload.php';
 
-	$arr_module = [];
-	// kiem tra folder co ton tai khong 
-	if(is_dir(MODULES)){
-		// lay het cac folder trong thu muc
-		$data_folder = glob(MODULES.'*',GLOB_ONLYDIR);
-		
-		foreach ($data_folder as $item)
-		{
-			$data = [] ; 
-			$data = 
-			[
-				'name' => str_replace(MODULES,'',$item),
-				'path' => $item
-			];
-			$arr_module[] = $data;
-		}
-	}
-	if($_SERVER['REQUEST_METHOD'] == "POST")
-	{
-		// dd(" OK ");
-		$name = isset($_POST['add_module']) ? $_POST['add_module'] : '';
-		$module = isset($_POST['module']) ? $_POST['module'] : '';
+    // tong so san pham
+    $countProduct = DB::countTable('products');
+    // tong so user 
+    $countUsers = DB::countTable('users');
+    // tong so don hang
+    $countTransactions = DB::countTable('transactions');
+    // danh muc san pham
+    $countCatePro = DB::countTable('category_products');
 
-		if($name == 'add_module')
-		{
-			
-			// dd("  THEM MOI MODULES ");
-			// kiem tra thu mục đã tồn tai hay chưa
-			// nếu chưa thì tiến hành tạo thư mục
-			
-			$create_folder = MODULES . $module;
-			$check = createFolder(MODULES,$module);
-		
-			if($check['code'] == 1)
-			{
-				// $copy = copy( MAIN ,$create_folder);
-				$copy = exec ( " cp -r ".MAIN."*" . ' ' .$create_folder);
-			}
-			
-			header("Location: /admin/");exit();
-		}
-	}
-	exec('attrib +s +h '.MODULES.'settings');
+    // doanh thu ngay 
+    $day = date('d');
+    $sqltime2 = "SELECT SUM(tst_total) as doanhthu FROM transactions WHERE 1 AND tst_status = 1 AND DAY(tst_date_payment) = $day";
+    $amountDay = DB::fetchsql($sqltime2);
+
+    // doanh thu tháng
+    $month = date('m');
+    $sqltime3 = "SELECT SUM(tst_total) as doanhthu FROM transactions WHERE 1 AND tst_status = 1 AND MONTH(tst_date_payment) = $month";
+    $amountMonth = DB::fetchsql($sqltime3);
+
+    /**
+     * danh thu theo  tuần
+     */
+    
+    $dates = date('Y-m-d');
+    // while (date('w', strtotime($dates)) != 1) {
+    //     $tmp = strtotime('-1 day', strtotime($dates));
+    //     $dates = date('Y-m-d', $tmp);
+    // }
+ 
+    $week = date('W', strtotime($dates));
+    $sqltime4 = "SELECT SUM(tst_total) as doanhthu FROM transactions WHERE 1 AND tst_status = 1 AND WEEK(tst_date_payment) =  $week";
+    $amountWeek = DB::fetchsql($sqltime4);
+
+    // tong doanh thu
+
+    $sqltime5 = "SELECT SUM(tst_total) as doanhthu FROM transactions WHERE 1";
+    $amountSum = DB::fetchsql($sqltime5);
+
 ?>
 <!DOCTYPE html>
-<html lang="">
-	<head>
-		<meta charset="utf-8">
-		<meta http-equiv="X-UA-Compatible" content="IE=edge">
-		<meta name="viewport" content="width=device-width, initial-scale=1">
-		<title> Base Admin </title>
-
-		<!-- Bootstrap CSS -->
-		<link rel="stylesheet" href="/public/app/css/bootstrap.min.css?<?= rand(1,9999) ?>">
-		<link rel="stylesheet" href="/public/app/css/base.css?<?= rand(1,9999) ?>">
-	</head>
-	<body>
-		<div class="admin-na" id="main-content" style="border: 1px solid red">
-			<!-- HEADER -->
-			<section>
-				<nav class="navbar navbar-default navbar-fixed-top" role="navigation" style="padding: 0 15px;">
-					<div class="container-pluid">
-						<a class="navbar-brand" href="#"> <i class="glyphicon glyphicon-home"></i> </a>
-						<ul class="nav navbar-nav">
-							<li class="active">
-								<a href="#"> Thông tin website </a>
-							</li>
-							<li>
-								<a href="#"> Giới thiệu </a>
-							</li>
-							<li>
-								<a href="#"> Hướng dẫn sử dụng  </a>
-							</li>
-						</ul>
-						<ul class="nav navbar-nav navbar-right">
-					      	<li><a href="#"><span class="glyphicon glyphicon-user"></span> Đăng ký </a></li>
-					      	<li><a href="#"><span class="glyphicon glyphicon-log-in"></span> Đăng nhập </a></li>
-					      	<li class="dropdown">
-						        <a class="dropdown-toggle" data-toggle="dropdown" href="#"> Xin Chào Admin 
-						        	<span class="caret"></span></a>
-						        	<ul class="dropdown-menu">
-						          		<li><a href="#"><i class="glyphicon glyphicon-user"></i> Thông tin cá nhân </a></li>
-						          		<li><a href="#"><i class="glyphicon glyphicon-log-out"></i> Đăng xuất </a></li>
-						        	</ul>
-						      </li>
-					    </ul>
-					</div>
-				</nav>
-			</section>
-			<!-- / END HEADER -->
-
-			<!-- MAIN CONTENT -->
-			<section style="margin-top: 55px;">
-				<div class="sidebar-left pull-left" style="width: 20%;margin: 0 5px 5px 5px">
-					<div class="profile-sidebar border">
-						<!-- SIDEBAR USERPIC -->
-						<div class="logo-admin text-center">
-							<img src="/public/logo.JPG" class="img-circle img" alt="" title="Image admin" style="width: 150px;height: 150px;">
-						</div>
-						<!-- END SIDEBAR USERPIC -->
-						<!-- SIDEBAR USER TITLE -->
-						<div class="profile-usertitle text-center">
-							<div class="profile-usertitle-name">
-								Marcus Doe
-							</div>
-						</div>
-						<!-- END SIDEBAR USER TITLE -->
-						<!-- SIDEBAR BUTTONS -->
-						<div class="profile-userbuttons text-center">
-							<button type="button" class="btn btn-success btn-sm">Follow</button>
-							<button type="button" class="btn btn-danger btn-sm">Message</button>
-						</div>
-						<div style="background: #dedede;height: 1px;width: 70%;margin: 5px auto;"></div>
-						<!-- END SIDEBAR BUTTONS -->
-						<!-- SIDEBAR MENU -->
-						<div class="profile-usermenu" style="margin: 0 10px;">
-							<ul class="nav">
-								<li class="active">
-									<a href="#">
-										<i class="glyphicon glyphicon-home"></i> Trang chủ
-									</a>
-								</li>
-								<li>
-									<a href="#">
-										<i class="glyphicon glyphicon-user"></i> Thành viên
-									</a>
-								</li>
-								<li>
-									<a href="#">
-										<i class="glyphicon glyphicon-flag"></i> Document
-									</a>
-								</li>
-							</ul>
-						</div>
-						<!-- END MENU -->
-					</div>
-				</div>
-				<div class="content-main border pull-right" style="width: 78%;margin: 0 5px 5px 5px;padding: 5px;">
-		            <div class="content" style="width: 100%;display: block;">
-		            
-						<div class="col-sm-6">
-							<h5> Danh sach cac modules </h5>
-							<table class="table table-hover">
-								<thead>
-									<tr>
-										<th>STT</th>
-										<th> Ten modules </th>
-										<th> Thao tác </th>
-									</tr>
-								</thead>
-								<tbody>
-									<?php foreach($arr_module as $key => $item) :?>
-										<tr>
-											<td> <?= $key + 1 ?></td>
-											<td> <?= $item['name'] ?></td>
-											<td>
-												<a href="delete.php?path=<?= $item['path'] ?>" class="btn btn-xs btn-danger"><i class="glyphicon glyphicon-trash"></i> Xoá </a>
-												<a href="update.php" class="btn btn-xs btn-info"><i class="glyphicon glyphicon-pencil"></i> Sửa tên  </a>
-											</td>
-										</tr>
-									<?php endforeach ;?>
-									
-								</tbody>
-							</table>
-						</div>
-						<div class="col-sm-6">
-							<h5> Tao moi Modules </h5>
-							<form action="" method="POST" class="form-inline" role="form">
-								<div class="form-group">
-									<label class="" for=""> Tên modules </label>
-									<input type="text" class="form-control" name="module" required="" placeholder=" Tạo mới modules ">
-								</div>
-								<div>
-									<input type="submit" class="btn btn-xs btn-success" value="Thêm mới" />	
-									<input type="hidden" name="add_module" value="add_module"> 
-								</div>
-								
-							</form>
-						</div>
-		            </div>
-				</div>
-				<div class="clearfix"></div>
-			</section>
-			<!-- / END MAIN - CONTENT -->
-			
-
-		</div>
-		<!-- jQuery -->
-		<script src="//code.jquery.com/jquery.js"></script>
-		<script src="/public/app/js/bootstrap.min.js"></script>
-	</body>
-</html>
-
-
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <title> <?= isset($title_global) ? $title_global : 'Trang admin ' ?>  </title>
+        <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
+        <?php require_once __DIR__ .'/layouts/inc_css.php'; ?>
+        <!-- <link rel="stylesheet" href="/public/admin/css/bootstrap-tagsinput.css"> -->
+    </head>
+    <body class="hold-transition skin-blue fixed sidebar-mini">
+        <!-- Site wrapper -->
+        <div class="wrapper">
+            
+            <?php require_once __DIR__ .'/layouts/inc_header.php'; ?>
+            <!-- ======================HEADER========================= -->
+            <?php require_once __DIR__ .'/layouts/inc_sidebar.php'; ?>
+            <!-- =======================SIDEBAR======================== -->
+            <!-- ======================= CONTENT======================== -->
+            <div class="content-wrapper">
+                <section class="content-header">
+                    <h1>QUẢN TRỊ WEBSITE</h1>
+                    <ol class="breadcrumb">
+                        <li class="active"><a href="/admin"><i class="fa fa-dashboard"></i> Home</a></li>
+                    </ol>
+                </section>
+                <!-- Main content -->
+                <section class="content">
+                    <!-- Default box -->
+                    <div class="box">
+                        <div class="box-body border mr-t-10">
+                            <div class="row">
+                                <div class="col-lg-3 col-xs-6">
+                                    <!-- small box -->
+                                    <div class="small-box bg-aqua">
+                                        <div class="inner">
+                                            <h3><?= $countTransactions ?></h3>
+                                            <p> Đơn hàng </p>
+                                        </div>
+                                        <div class="icon">
+                                            <i class="ion ion-bag"></i>
+                                        </div>
+                                        <a href="/admin/modules/transactions" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a>
+                                    </div>
+                                </div>
+                                <!-- ./col -->
+                                <div class="col-lg-3 col-xs-6">
+                                    <!-- small box -->
+                                    <div class="small-box bg-green">
+                                        <div class="inner">
+                                            <h3><?= $countCatePro ?></h3>
+                                            <p> Danh Mục Sản Phẩm </p>
+                                        </div>
+                                        <div class="icon">
+                                            <i class="ion ion-stats-bars"></i>
+                                        </div>
+                                        <a href="/admin/modules/cate-products" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a>
+                                    </div>
+                                </div>
+                                <!-- ./col -->
+                                <div class="col-lg-3 col-xs-6">
+                                    <!-- small box -->
+                                    <div class="small-box bg-yellow">
+                                        <div class="inner">
+                                            <h3><?= $countUsers ?></h3>
+                                            <p> Thành Viên </p>
+                                        </div>
+                                        <div class="icon">
+                                            <i class="ion ion-person-add"></i>
+                                        </div>
+                                        <a href="/admin/modules/users" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a>
+                                    </div>
+                                </div>
+                                <!-- ./col -->
+                                <div class="col-lg-3 col-xs-6">
+                                    <!-- small box -->
+                                    <div class="small-box bg-red">
+                                        <div class="inner">
+                                            <h3><?= $countProduct ?></h3>
+                                            <p> Sản Phẩm </p>
+                                        </div>
+                                        <div class="icon">
+                                            <i class="ion ion-pie-graph"></i>
+                                        </div>
+                                        <a href="/admin/modules/products" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a>
+                                    </div>
+                                </div>
+                                <!-- ./col -->
+                            </div>
+                            <div class="row">
+                                <div class="col-md-3 col-sm-6 col-xs-12">
+                                    <div class="info-box bg-aqua">
+                                        <span class="info-box-icon"><i class="fa fa-bookmark-o"></i></span>
+                                        <div class="info-box-content">
+                                            <span class="info-box-text">Doanh thu hôm nay</span>
+                                            <span class="info-box-number"><?= formatprice($amountDay[0]['doanhthu']) ?> đ</span>
+                                            <div class="progress">
+                                                <div class="progress-bar" style="width: 70%"></div>
+                                            </div>
+                                            <span class="progress-description">
+                                            70% Increase in 30 Days
+                                            </span>
+                                        </div>
+                                        <!-- /.info-box-content -->
+                                    </div>
+                                    <!-- /.info-box -->
+                                </div>
+                                <!-- /.col -->
+                                <div class="col-md-3 col-sm-6 col-xs-12">
+                                    <div class="info-box bg-green">
+                                        <span class="info-box-icon"><i class="fa fa-thumbs-o-up"></i></span>
+                                        <div class="info-box-content">
+                                            <span class="info-box-text">Doanh thu tuần</span>
+                                            <span class="info-box-number"><?= formatprice($amountWeek[0]['doanhthu']) ?></span>
+                                            <div class="progress">
+                                                <div class="progress-bar" style="width: 70%"></div>
+                                            </div>
+                                            <span class="progress-description">
+                                            70% Increase in 30 Days
+                                            </span>
+                                        </div>
+                                        <!-- /.info-box-content -->
+                                    </div>
+                                    <!-- /.info-box -->
+                                </div>
+                                <!-- /.col -->
+                                <div class="col-md-3 col-sm-6 col-xs-12">
+                                    <div class="info-box bg-yellow">
+                                        <span class="info-box-icon"><i class="fa fa-calendar"></i></span>
+                                        <div class="info-box-content">
+                                            <span class="info-box-text">Doanh Thu Tháng Nay</span>
+                                            <span class="info-box-number"><?= formatprice($amountMonth[0]['doanhthu']) ?>đ</span>
+                                            <div class="progress">
+                                                <div class="progress-bar" style="width: 70%"></div>
+                                            </div>
+                                            <span class="progress-description">
+                                            70% Increase in 30 Days
+                                            </span>
+                                        </div>
+                                        <!-- /.info-box-content -->
+                                    </div>
+                                    <!-- /.info-box -->
+                                </div>
+                                <!-- /.col -->
+                                <div class="col-md-3 col-sm-6 col-xs-12">
+                                    <div class="info-box bg-red">
+                                        <span class="info-box-icon"><i class="fa fa-comments-o"></i></span>
+                                        <div class="info-box-content">
+                                            <span class="info-box-text">Doanh Thu Năm </span>
+                                            <span class="info-box-number"><?= formatprice($amountSum[0]['doanhthu']) ?>đ</span>
+                                            <div class="progress">
+                                                <div class="progress-bar" style="width: 70%"></div>
+                                            </div>
+                                            <span class="progress-description">
+                                            70% Increase in 30 Days
+                                            </span>
+                                        </div>
+                                        <!-- /.info-box-content -->
+                                    </div>
+                                    <!-- /.info-box -->
+                                </div>
+                                <!-- /.col -->
+                            </div>
+                        </div>
+                    </div>
+                    <!-- /.box -->
+                </section>
+            </div>
+            <!-- =======================END CONTENT======================== -->
+            <?php require_once __DIR__ .'/layouts/inc_footer.php'; ?>
+        </div>
+        <?php require_once __DIR__ .'/layouts/inc_js.php'; ?>

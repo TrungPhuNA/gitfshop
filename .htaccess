@@ -6,6 +6,6 @@
 	</Files>
 
 	#chuyển hướng file lỗi 
-	ErrorDocument 404 http://www.example.com/404.html
+	ErrorDocument 404 http://basephp.loca/pages
     
 </IfModule>

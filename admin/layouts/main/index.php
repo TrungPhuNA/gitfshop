@@ -1,3 +1,9 @@
+<?php
+    $modules = '';
+    $title_global = '';
+    require_once __DIR__ .'/../../autoload.php';
+?>
+
 <!DOCTYPE html>
 <html>
     <head>
@@ -20,12 +26,12 @@
             <div class="content-wrapper">
                 <section class="content-header">
                     <h1>
-                        Danh sách danh mục
+                        <?= isset($title_global) ? $title_global : '' ?>
                     </h1>
                     <ol class="breadcrumb">
-                        <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
-                        <li><a href="#">News (modules)</a></li>
-                        <li class="active">Categorys</li>
+                        <li><a href="/"><i class="fa fa-dashboard"></i> Home</a></li>
+                        <li><a href="#"> Sản Phẩm </a></li>
+                        <li class="active"> Danh sách</li>
                     </ol>
                 </section>
                 <!-- Main content -->
@@ -51,33 +57,14 @@
                                         <tr>
                                             <td>4</td>
                                             <td>Học jquery</td>
-                                            <td><a href="/public/admin/news/categorys/4/hot" class="custome-btn label label-info"><span>Hot</span></a></td>
-                                            <td><a href="/public/admin/news/categorys/4/active" class="custome-btn label label-info"><span>Active</span></a></td>
+                                            <td><a href="hot.php?id=<?= 1?>" class="custome-btn label label-info"><span>Hot</span></a></td>
+                                            <td><a href="active?id=<?=1?>" class="custome-btn label label-info"><span>Active</span></a></td>
                                             <td>
-                                                <a href="/public/admin/news/categorys/4/edit" class="custome-btn btn-info btn-xs"><i class="fa fa-pencil-square"></i> Edit </a>
-                                                <a href="/public/admin/news/categorys/4/delete" class="custome-btn btn-danger btn-xs delete" ><i class="fa fa-trash"></i> Trash </a>
+                                                <a href="edit.php?id=<?= 1?>" class="custome-btn btn-info btn-xs"><i class="fa fa-pencil-square"></i> Edit </a>
+                                                <a href="delete.php?id=<?=1?>" class="custome-btn btn-danger btn-xs delete" ><i class="fa fa-trash"></i> Trash </a>
                                             </td>
                                         </tr>
-                                        <tr>
-                                            <td>3</td>
-                                            <td>Lập trình web</td>
-                                            <td><a href="/public/admin/news/categorys/3/hot" class="custome-btn label label-info"><span>Hot</span></a></td>
-                                            <td><a href="/public/admin/news/categorys/3/active" class="custome-btn label label-info"><span>Active</span></a></td>
-                                            <td>
-                                                <a href="/public/admin/news/categorys/3/edit" class="custome-btn btn-info btn-xs"><i class="fa fa-pencil-square"></i> Edit </a>
-                                                <a href="/public/admin/news/categorys/3/delete" class="custome-btn btn-danger btn-xs delete" ><i class="fa fa-trash"></i> Trash </a>
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td>1</td>
-                                            <td>lap trinh laravel</td>
-                                            <td><a href="/public/admin/news/categorys/1/hot" class="custome-btn label label-default"><span>None</span></a></td>
-                                            <td><a href="/public/admin/news/categorys/1/active" class="custome-btn label label-info"><span>Active</span></a></td>
-                                            <td>
-                                                <a href="/public/admin/news/categorys/1/edit" class="custome-btn btn-info btn-xs"><i class="fa fa-pencil-square"></i> Edit </a>
-                                                <a href="/public/admin/news/categorys/1/delete" class="custome-btn btn-danger btn-xs delete" ><i class="fa fa-trash"></i> Trash </a>
-                                            </td>
-                                        </tr>
+                                    
                                     </tbody>
                                 </table>
                             </div>
@@ -100,5 +87,3 @@
             <?php require_once __DIR__ .'/../../layouts/inc_footer.php'; ?>
         </div>
         <?php require_once __DIR__ .'/../../layouts/inc_js.php'; ?>
-        <!-- <script src="/public/admin/js/bootstrap-tagsinput.min.js"></script> -->
-        <!-- <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/typeahead.js/0.11.1/typeahead.bundle.min.js"></script> -->

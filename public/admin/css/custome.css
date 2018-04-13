@@ -18,3 +18,5 @@ td a
 {
     border:1px solid #dedede;
 }
+.color-red { color: red !important;}
+.border-red {border: 1px solid red;}
