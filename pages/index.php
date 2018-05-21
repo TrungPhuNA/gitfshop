@@ -149,7 +149,7 @@
                                             <div class="hidenitem">
                                                 <p><a href="/pages/chi-tiet-san-pham.php?id=<?= $item['id'] ?>"><i class="fa fa-search"></i></a></p>
                                                 <p><a href="javascript:;void(0)" class="addFavorite" data-id="<?= $item['id'] ?>"><i class="fa fa-heart"></i></a></p>
-                                                <p><a href=""><i class="fa fa-shopping-basket"></i></a></p>
+                                                <p><a href="javascript:;void(0)"  class="add_to_cart" data-id-product=<?= $item['id'] ?>> <i class="fa fa-shopping-basket"></i></a></p>
                                             </div>
                                         </div>
                                     <?php endforeach ; ?>
@@ -178,7 +178,7 @@
                                         <div class="hidenitem">
                                             <p><a href="/pages/chi-tiet-san-pham.php?id=<?= $item['id'] ?>"><i class="fa fa-search"></i></a></p>
                                             <p><a href="" class="addFavorite" data-id="<?= $item['id'] ?>"><i class="fa fa-heart"></i></a></p>
-                                            <p><a href=""><i class="fa fa-shopping-basket"></i></a></p>
+                                            <p><a href="javascript:;void(0)"  class="add_to_cart" data-id-product=<?= $item['id'] ?>> <i class="fa fa-shopping-basket"></i></a></p>
                                         </div>
                                     </div>
                                 <?php endforeach ; ?>

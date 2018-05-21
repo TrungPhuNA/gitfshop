@@ -5,7 +5,16 @@
 	deny from all
 	</Files>
 
+	# bảo vệ file wp-config
+    <Files config.php>
+    Order Allow,Deny
+    Deny from all
+    </Files>
+
 	#chuyển hướng file lỗi 
 	ErrorDocument 404 http://basephp.loca/pages
-    
+
+    Redirect 301 http://basephp.loca/ http://basephp.loca/pages/
+
+
 </IfModule>

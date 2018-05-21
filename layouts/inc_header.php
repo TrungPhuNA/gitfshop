@@ -3,7 +3,7 @@
                     <div class="container">
                         <div class="row clearfix">
                             <div class="col-md-6" id="header-text">
-                                <a>TrungPhuNA</a><b>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do </b>
+                                <a>Chu Văn Thắng</a><b> Đồ án tốt nghiệp - Lớp Tin Trắc Địa K58</b>
                             </div>
                             <div class="col-md-6">
                                 <nav id="header-nav-top">
@@ -46,7 +46,7 @@
                                 z-index: 9999999;
                                 background: white;
                                 border: 1px solid #dedede;
-                                width: 77.5%;
+                                width: 71.7%;
                                 border-top: 0;
                                 height: 400px;
                                 overflow-y: auto;
@@ -73,7 +73,7 @@
                                     });
                                 });
                                 $('#header-search').blur(function(){
-                                    $("#suggesstion-box").css("display","none");
+//                                    $("#suggesstion-box").css("display","none");
                                 })
                             });
                             //To select country name
@@ -87,15 +87,11 @@
                                 <div class="form-group">
                                     <label>
                                         <select name="category" class="form-control">
-                                            <option> All Category</option>
-                                            <option> Dell </option>
-                                            <option> Hp </option>
-                                            <option> Asuc </option>
-                                            <option> Apper </option>
+                                            <option> Tên sản phẩm </option>
                                         </select>
                                     </label>
                                     <input type="text" name="keywork" id="header-search" placeholder=" input keywork" class="form-control">
-                                    <button type="submit" class="btn btn-default"><i class="fa fa-search"></i></button>
+<!--                                    <button type="submit" class="btn btn-default"><i class="fa fa-search"></i></button>-->
                                 </div>
                             </form>
                         

@@ -17,6 +17,7 @@ var frontend = {
         _this.removeItemCart();
         _this.clickItemResultSearch();
         _this.addFavorite() ; // them san pham yeu thich
+        _this.removeItemFavorite() ; // xoa san pham yeu thich
     },
     addCart()
     {
@@ -24,6 +25,12 @@ var frontend = {
         $(".add_to_cart").click( function () {
             let $idProduct = $(this).attr("data-id-product");
             let $qty = $("#qty").val();
+
+            if ($qty == 'undefined')
+            {
+                $qty = 1;
+            }
+
             $.ajax({
                 type: "GET",
                 url:  _this.configSelecter.base_Url + '/shoppingcart/add.php',
@@ -119,6 +126,7 @@ var frontend = {
         })
     
     },
+
     updateCart()
     {
         let _this = this;
@@ -190,7 +198,36 @@ var frontend = {
                 }
             })
         })
-    }
+    },
+    removeItemFavorite()
+    {
+        let _this = this;
+        //remove-item-favorite
+        $(".remove-item-favorite").click(function(){
+            console.log(location.href);
+            $this = $(this);
+            $key = $(this).attr('data-id-product');
+            $.ajax({
+                type: "GET",
+                url:  _this.configSelecter.base_Url + '/favorite/remove.php',
+                data: { idProduct : $key},
+                success: function( msg ) {
+                    if( msg == 1)
+                    {
+                        $this.parents('.delete_tr').remove();
+                        $.notify(' Xoá sản phẩm thành công ','success');
+                    }else
+                    {
+                        $.notify(' Xoá sản phẩm trong giỏ hàng thất bại ','error');
+                    }
+                },
+                error : function () {
+                    console.log(" LOI AJAX ");
+                }
+            });
+            console.log($key);
+        })
+    },
 }
 
 $(function () {

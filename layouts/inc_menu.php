@@ -6,11 +6,8 @@
             </div>
             <!--menu main-->
             <ul id="menu-main">
-                <li>
-                    <a href="">Shop</a>
-                </li>
-                <li>
-                    <a href="">Mobile</a>
+                <li class="<?= isset($navActive)  && $navActive == 'san-pham' ? 'active-menu' : ''?>">
+                    <a href="/pages/san-pham.php">Shop</a>
                 </li>
                 <li class="<?= isset($navActive)  && $navActive == 'gui-phan-hoi' ? 'active-menu' : ''?>">
                     <a href="/pages/gui-phan-hoi.php">Gủi phản hồi </a>

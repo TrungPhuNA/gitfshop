@@ -13,7 +13,6 @@ $sql = "SELECT products.* , category_products.cpr_name FROM products
          WHERE products.ID IN (".$product.")";
 $list  = Pagination::pagination('products',$sql,'page',9);
 
-
 ?>
     <!DOCTYPE html>
     <html>
@@ -61,7 +60,7 @@ $list  = Pagination::pagination('products',$sql,'page',9);
                                     </td>
                                     <td><?= formatPrice($item['prd_price']) ?>đ</td>
                                     <td>
-                                        <a href="javascript:;void(0)" class="btn btn-xs btn-danger remove-item-cart" data-id-product=<?= $key ?>> Huỷ Bỏ  </a>
+                                        <a href="javascript:;void(0)" class="btn btn-xs btn-danger remove-item-favorite" data-id-product=<?= $item['id'] ?>> Huỷ Bỏ  </a>
                                     </td>
                                 </tr>
                             <?php endforeach ; ?>

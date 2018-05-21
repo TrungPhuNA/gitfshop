@@ -2,7 +2,7 @@
 	require_once __DIR__. '/../autoload.php';
 	
 	// B1 =. Lay id cua sp can them vao gio hang
-
+    $qty = 1;
     if( isset($_GET['qty']))
     {
         $qty = $_GET['qty'];
@@ -17,7 +17,7 @@
     // nếu lơn hơn thì thông báo 
     // bé hơn thì tiếp tục mua hàng
     $product = DB::fetchOne("products",(int)$id);
-    
+
     if( $product['prd_number'] < $qty )
     {
         echo 0;die;
