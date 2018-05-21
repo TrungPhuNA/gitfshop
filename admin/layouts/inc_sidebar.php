@@ -37,9 +37,9 @@
             <li class="<?= isset($modules) && $modules == 'warehouses' ? 'active' : ''?>">
                 <a href="/admin/modules/warehouses"><i class="fa fa-book"></i> <span> Quản lý kho </span></a>
             </li>
-<!--            <li class="">-->
-<!--                <a href="/admin/modules/modules"><i class="fa fa-book"></i> <span>Modules</span></a>-->
-<!--            </li>-->
+            <li class="">
+                <a href="/admin/modules/modules"><i class="fa fa-book"></i> <span>Modules</span></a>
+            </li>
         </ul>
     </section>
     <!-- /.sidebar -->

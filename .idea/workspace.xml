@@ -2,19 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="430a972e-a7cd-4228-8060-b80e3ec5ad5e" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/favorite/remove.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.htaccess" afterPath="$PROJECT_DIR$/.htaccess" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/admin/layouts/inc_footer.php" afterPath="$PROJECT_DIR$/admin/layouts/inc_footer.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/admin/layouts/inc_header.php" afterPath="$PROJECT_DIR$/admin/layouts/inc_header.php" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/admin/layouts/inc_sidebar.php" afterPath="$PROJECT_DIR$/admin/layouts/inc_sidebar.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/favorite/index.php" afterPath="$PROJECT_DIR$/favorite/index.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/layouts/inc_header.php" afterPath="$PROJECT_DIR$/layouts/inc_header.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/layouts/inc_menu.php" afterPath="$PROJECT_DIR$/layouts/inc_menu.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/pages/danh-muc-san-pham.php" afterPath="$PROJECT_DIR$/pages/danh-muc-san-pham.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/pages/index.php" afterPath="$PROJECT_DIR$/pages/index.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/frontend/js/app.js" afterPath="$PROJECT_DIR$/public/frontend/js/app.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/shoppingcart/add.php" afterPath="$PROJECT_DIR$/shoppingcart/add.php" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -68,8 +56,8 @@
       <file leaf-file-name="inc_sidebar.php" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/admin/layouts/inc_sidebar.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="500">
-              <caret line="40" column="31" lean-forward="false" selection-start-line="40" selection-start-column="31" selection-end-line="40" selection-end-column="31" />
+            <state relative-caret-position="485">
+              <caret line="39" column="11" lean-forward="false" selection-start-line="39" selection-start-column="11" selection-end-line="41" selection-end-column="17" />
               <folding />
             </state>
           </provider>
@@ -687,8 +675,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/admin/layouts/inc_sidebar.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="500">
-          <caret line="40" column="31" lean-forward="false" selection-start-line="40" selection-start-column="31" selection-end-line="40" selection-end-column="31" />
+        <state relative-caret-position="485">
+          <caret line="39" column="11" lean-forward="false" selection-start-line="39" selection-start-column="11" selection-end-line="41" selection-end-column="17" />
           <folding />
         </state>
       </provider>
