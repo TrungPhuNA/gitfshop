@@ -26,7 +26,7 @@
         $filter['category'] = Input::get('category');
     }
     if ( Input::get('id') ) {
-        $sql .= ' AND products.id = '.Input::get('id') ;
+        $sql .= ' AND products.id = '.(int)Input::get('id') ;
         $filter['id'] = Input::get('id');
     }
     if ( Input::get('price') ) {
@@ -59,7 +59,7 @@
         <?php require_once __DIR__ .'/../../layouts/inc_css.php'; ?>
         <!-- <link rel="stylesheet" href="/public/admin/css/bootstrap-tagsinput.css"> -->
         <style>
-            
+            .item_product:hover { cursor: pointer}
         </style>
     </head>
     <body class="hold-transition skin-blue fixed sidebar-mini">
@@ -84,7 +84,7 @@
                 <!-- Main content -->
                 <section class="content">
                     <!-- Default box -->
-                    <div class="box <?= empty($filter) ? 'collapsed-box' : ''  ?>">
+                    <div class="box">
                         <div class="box-header with-border">
                             <h3 class="box-title"> Bộ Lọc Tìm Kiếm </h3>
 
@@ -153,7 +153,7 @@
                                             <th>Action</th>
                                         </tr>
                                         <?php foreach($products as $pro) :?>
-                                            <tr class='<?= $pro['prd_number'] <= 5 ? "bg-danger-nhat" : "" ?>'>
+                                            <tr class='<?= $pro['prd_number'] <= 5 ? "bg-danger-nhat" : "" ?> item_product' data-id="<?= $pro['id'] ?>">
                                                 <td><?= $pro['id'] ?></td>
                                                 <td><?= $pro['prd_name'] ?></td>
                                                 <td>
@@ -179,9 +179,9 @@
                         <!-- /.box-body -->
                         <div class="box-footer">
                             <div class="custome-paginate">
-                                <div class="pull-left">
+                               <!--  <div class="pull-left">
                                     <p>Trang 1 - Số bản ghi hiển thị 20 - Tổng số trang 1 - Tổng số bản ghi 3</p>
-                                </div>
+                                </div> -->
                                 <div class="pull-right">
                                     <?php echo Pagination::getListpage($filter) ?>
                                 </div>
@@ -196,3 +196,35 @@
             <?php require_once __DIR__ .'/../../layouts/inc_footer.php'; ?>
         </div>
         <?php require_once __DIR__ .'/../../layouts/inc_js.php'; ?>
+
+
+        <script>
+
+            $(function () {
+                $(".item_product").click(function(){
+                    let $that = $(this);
+
+                    $(".item_product_content").remove();
+                    if ($that.hasClass('active'))
+                    {
+                        $that.removeClass('active');
+                        return false;
+                    }else{
+                        $that.addClass("active")
+                    }
+
+                    let id = $that.attr("data-id");
+
+                    $.ajax({
+                        url: location.origin + '/admin/modules/products/ajax.php',
+                        type:'POST',
+                        data:{'id':id},
+                        async:true,
+                        success:function(data)
+                        {
+                            $that.after(data);
+                        }
+                    })
+                });
+            })
+        </script>

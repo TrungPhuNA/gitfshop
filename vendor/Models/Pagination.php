@@ -24,16 +24,20 @@ class Pagination extends Connect
         // so trang
         $totalPage = ceil($that->totalPageRecou()/$stop);
         $that->setTotalSql($that->totalPageRecou());
-        
+
+
         // gan  tong so trang
         $that->setTotalPage($totalPage);
-
+            
         // vi tri lay
         $start = ($that->getPage($start) - 1) * $stop;
+
+        
         //  neu ko ton tai $sql
         if ($sql == '')
         {
             $sql = " SELECT * FROM {$table} LIMIT $start , $stop ";
+
             $result = mysqli_query($that->link,$sql) or die("Lỗi  truy vấn sql " .mysqli_error($that->link));
         }
         else
@@ -41,6 +45,8 @@ class Pagination extends Connect
             $sql .= " LIMIT $start , $stop ";
             $result = mysqli_query($that->link,$sql) or die("Lỗi  truy vấn sql " .mysqli_error($that->link));
         }
+
+
         $data = [];
         if( $result)
         {
@@ -50,6 +56,8 @@ class Pagination extends Connect
             }
         }
         $that->total = count($data);
+
+
         return $data;
     }
 
@@ -127,12 +135,16 @@ class Pagination extends Connect
             }
             $patten = substr($patten, 0, -1);
         }   
+
         $that = new self();
         // tổng số trang
         $totalPage = intval($that->getTotalPage());
+
+
         $html = '<ul class="pagination pagination-sm no-margin pull-right">' ;
         if ($that->getPage('page') > 1)
         {
+
             $pre = intval($that->getPage('page')) - 1;
             if ( ! $patten)
             {
@@ -141,7 +153,9 @@ class Pagination extends Connect
             {
                 $html .= '<li><a href="'.$patten.'&page='.$pre.'">Pre</a></li>';
             }
+
         }
+        
         if( $totalPage > 1 )
         {
             if( $totalPage > 10 )
@@ -205,6 +219,7 @@ class Pagination extends Connect
                 }
             }
         }
+        
         if ($that->getPage('page') + 1 <= $totalPage)
         {
             $pre = intval($that->getPage('page')) + 1;

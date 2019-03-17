@@ -27,6 +27,15 @@ var xulyadmin =
     {
         $('.item-order').click(function() {
             $id = $(this).attr('data-id');
+
+            // tong tien
+            let total = $(this).parents('tr').find('.total').html();
+            $("#total-transaction").html(total);
+
+            //get name
+            let name = $(this).parents('tr').find('.name').html();
+            $("#auth-transaction").html(name);
+
             $.ajax({
                 type: "GET",
                 url:  location.href+'view.php',
@@ -37,6 +46,8 @@ var xulyadmin =
                         backdrop : 'static'
                     });
                     $("#order-content").html('').append(msg);
+
+
                 },
                 error : function () {
                     console.log(" LOI AJAX ");
@@ -52,12 +63,20 @@ var xulyadmin =
         $(document).on('click','.delete_item_order',function(){
             $this = $(this);
             $id = $this.attr('data-id_order');
+
             $.ajax({
                 type: "GET",
                 url:  location.href+'delete_item.php',
                 data: { id : $id},
                 success: function( msg ) {
-                   
+                   if (msg == 1)
+                   {
+                        $this.parents('tr').remove();
+                        $.notify(' Xoá sản phẩm khỏi đơn hàng thành công  ','success');
+                   }else {
+                       $.notify(' Xoá sản phẩm khỏi đơn hàng thất bại  ','error');
+                   }
+
                 },
                 error : function () {
                     console.log(" LOI AJAX ");
@@ -83,4 +102,28 @@ var xulyadmin =
 
 $(function () {
     xulyadmin.init();
+})
+
+$( function(){
+    $(".comfirm_delete").click(function (event) {
+        event.preventDefault();
+        let url = $(this).attr("href");
+        $.confirm({
+            title: ' Xoá dữ liệu',
+            content: ' Dữ liệu xoá đi không thể khôi phục hãy cân nhắc nhé !!!',
+            type: 'green',
+            buttons: {
+                ok: {
+                    text: "ok!",
+                    btnClass: 'btn-danger',
+                    keys: ['enter'],
+                    action: function(){
+                        console.log(this)
+                        location.href = url;
+                    }
+                },
+                cancel: function(){}
+            }
+        });
+    })
 })

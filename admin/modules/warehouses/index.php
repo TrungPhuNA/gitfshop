@@ -1,13 +1,65 @@
 <?php
     $modules = 'warehouses';
-    $title_global = '  Danh sách sản phẩm sắp hết  ';
+    $title_global = ' Quản lý kho ';
     require_once __DIR__ .'/../../autoload.php';
 
     $sql = "SELECT products.* , category_products.cpr_name FROM products 
         LEFT JOIN category_products ON category_products.id = products.prd_category_product_id
-        WHERE 1 AND prd_number >=20
+        WHERE 1 
     ";
     $filter = [];
+    if ( Input::get('pheptinh') )
+    {
+        $filter['pheptinh'] = Input::get('pheptinh');
+        $pheptinh = Input::get('pheptinh');
+    }
+    else
+    {
+        $pheptinh = ">=";
+    }
+
+    if (Input::get('number'))
+    {
+        
+        $sql .= " AND  prd_number " . $pheptinh . "  " .Input::get('number');
+        $filter['number'] = Input::get('number');
+    }
+
+    if (Input::get('view'))
+    {
+        
+        $sql .= " AND  prd_view " . $pheptinh . "  " .Input::get('view');
+        $filter['view'] = Input::get('view');
+    }
+
+     if (Input::get('hear'))
+    {
+        
+        $sql .= " AND  prd_hear " . $pheptinh . "  " .Input::get('hear');
+        $filter['hear'] = Input::get('hear');
+    }
+
+    $keyword = Input::get('name');
+    if ( $keyword ) {
+        $sql .= ' AND prd_name LIKE \'%'.$keyword.'%\'' ;
+        $filter['name'] = $keyword;
+    }
+
+
+    if ( Input::get('id') ) {
+        $sql .= ' AND products.id = '.Input::get('id') ;
+        $filter['id'] = Input::get('id');
+    }
+
+
+    if ( Input::get('time') ) {
+        $time = Input::get('time');
+        $date = get_start_and_time($time);
+
+        $sql .= " AND DAY(products.created_at) BETWEEN  '".$date['start']."' AND '".$date['end']."' ";
+        $filter['time'] = Input::get('time');
+    }
+
     $products = Pagination::pagination('products',$sql,'page',9);
 
 ?>
@@ -20,7 +72,18 @@
         <title> <?= isset($title_global) ? $title_global : 'Trang admin ' ?>  </title>
         <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
         <?php require_once __DIR__ .'/../../layouts/inc_css.php'; ?>
-        <!-- <link rel="stylesheet" href="/public/admin/css/bootstrap-tagsinput.css"> -->
+        <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.css" />
+        <style type="text/css">
+            #reportrange { position: relative; }
+            #reportrange:before {
+                content : "\f073";
+                position: absolute;
+                font-family: FontAwesome;
+                top: 50%;
+                transform: translateY(-50%);
+            }
+        
+        </style>
     </head>
     <body class="hold-transition skin-blue fixed sidebar-mini">
         <!-- Site wrapper -->
@@ -44,6 +107,78 @@
                 </section>
                 <!-- Main content -->
                 <section class="content">
+                    <div class="box">
+                        <div class="box-header with-border">
+                            <h3 class="box-title"> Bộ Lọc Tìm Kiếm </h3>
+
+                            <div class="box-tools pull-right">
+                                <button type="button" class="btn btn-box-tool" data-widget="collapse" data-toggle="tooltip" title="" data-original-title="Collapse">
+                                    <i class="fa fa-minus"></i>
+                                </button>
+                                <button type="button" class="btn btn-box-tool" data-widget="remove" data-toggle="tooltip" title="" data-original-title="Remove">
+                                    <i class="fa fa-times"></i>
+                                </button>
+                            </div>
+                        </div>
+                        <div class="box-body">
+                            <form action="">
+
+                                <div class="form-group col-sm-2">
+                                    <select class="form-control" name="number">
+                                        <option value=''>-- Số lượng sản phẩm  --</option>
+                                        <?php for($i = 0; $i <= 100 ; $i = $i + 5) :?>
+                                            <option value="<?=$i?>" <?= Input::get('number') && Input::get('number') == $i? "selected = 'selected'" : "" ?>> còn <?= $i ?> sản phẩm</option>
+                                        <?php endfor ;?>
+                                    </select>
+                                </div>
+
+                                <div class="form-group col-sm-2">
+                                    <select class="form-control" name="view">
+                                        <option value=''>-- Số lượng xem  --</option>
+                                        <?php for($i = 0; $i <= 100 ; $i = $i + 5) :?>
+                                            <option value="<?=$i?>" <?= Input::get('view') && Input::get('view') == $i? "selected = 'selected'" : "" ?>>  <?= $i ?> lần</option>
+                                        <?php endfor ;?>
+                                    </select>
+                                </div>
+
+                                <div class="form-group col-sm-2">
+                                    <select class="form-control" name="hear">
+                                        <option value=''>-- Số lượng thích  --</option>
+                                        <?php for($i = 0; $i <= 100 ; $i = $i + 5) :?>
+                                            <option value="<?=$i?>" <?= Input::get('hear') && Input::get('hear') == $i? "selected = 'selected'" : "" ?>>  <?= $i ?> lần</option>
+                                        <?php endfor ;?>
+                                    </select>
+                                </div>
+
+                                <div class="form-group col-sm-3">
+                                    <input type="text" class="form-control" autocomplete="off" name="name" placeholder=" Tên sản phẩm  " value="<?= Input::get('name') ? Input::get('name') : '' ?>">
+                                </div>
+                                
+                            
+                                <div class="form-group col-sm-1">
+                                    <input type="number" name="id" class="form-control" value="<?= Input::get('id') ?>" placeholder="ID">
+                                </div>
+
+                                <div id="reportrange" style="background: #fff; cursor: pointer;border-radius: 2px" class="form-group col-sm-3">
+                                    <input type="text" style="text-indent: 13px;"  value="<?= Input::get('time') ? Input::get('time') : '' ?>" name="time" autocomplete="off" placeholder="Thời gian thêm" class="form-control w-300">
+                                </div>    
+                                 <div class="form-group col-sm-2">
+                                    <select class="form-control" name="pheptinh">
+                                        <option value=">=" <?= Input::get('pheptinh') && Input::get('pheptinh') == '>=' ? "selected='selected'": ''?>> >= </option>
+                                        <option value="<=" <?= Input::get('pheptinh') && Input::get('pheptinh') == '<=' ? "selected='selected'": ''?>> <= </option>
+                                        <option value="=" <?= Input::get('pheptinh') && Input::get('pheptinh') == '=' ? "selected='selected'": ''?>> = </option>
+                                    </select>
+                                </div>                        
+
+                                <div class="form-group col-sm-3">
+                                    <input type="submit" value="Tìm Kiếm" class="btn  btn-success">
+                                    <a  href="index.php" class="btn  btn-danger"> Làm mới<a/>
+                                </div>
+                                
+                                
+                            </form>
+                        </div>
+                    </div>
                     <!-- Default box -->
                     <div class="box">
 
@@ -95,3 +230,32 @@
             <?php require_once __DIR__ .'/../../layouts/inc_footer.php'; ?>
         </div>
         <?php require_once __DIR__ .'/../../layouts/inc_js.php'; ?>
+         <script type="text/javascript" src="https://cdn.jsdelivr.net/momentjs/latest/moment.min.js"></script>
+        <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.min.js"></script>
+        <script>
+            $(document).ready(function(){
+                $('[data-toggle="tooltip"]').tooltip();   
+            });
+
+            $('#reportrange input').daterangepicker({
+                autoUpdateInput: false,
+                locale: {
+                    cancelLabel: 'Clear'
+                },
+                ranges: {
+                    'Hôm nay': [moment(), moment()],
+                    'Hôm qua': [moment().subtract(1, 'days'), moment().subtract(1, 'days')],
+                    '7 ngày trước': [moment().subtract(6, 'days'), moment()],
+                    '30 ngày trước': [moment().subtract(29, 'days'), moment()],
+                    'Tháng này': [moment().startOf('month'), moment().endOf('month')],
+                    'Tháng trước': [moment().subtract(1, 'month').startOf('month'), moment().subtract(1, 'month').endOf('month')]
+                }
+            })
+            .on('apply.daterangepicker', function (ev, picker) {
+                $(this).val(picker.startDate.format('MM/DD/YYYY') + ' - ' + picker.endDate.format('MM/DD/YYYY'));
+            })
+            .on('cancel.daterangepicker', function (ev, picker) {
+                $(this).val('');
+            });
+
+        </script>

@@ -1,17 +1,18 @@
 <?php
-require_once __DIR__. '/../autoload.php';
-// kiểm tra xem giỏ hàng có tồn tại không
-if( ! isset($_SESSION['hear']) ||  count($_SESSION['hear']) == 0 )
-{
-    redirectUrl('/pages');
-}
-//  gán danh sách giỏ hàng vào 1 mảng
-$product = $_SESSION['hear'];
-$product = array_values($product); $product = implode(',',$product);
-$sql = "SELECT products.* , category_products.cpr_name FROM products 
-        LEFT JOIN category_products ON category_products.id = products.prd_category_product_id
-         WHERE products.ID IN (".$product.")";
-$list  = Pagination::pagination('products',$sql,'page',9);
+    require_once __DIR__. '/../autoload.php';
+    // kiểm tra xem giỏ hàng có tồn tại không
+    if( ! isset($_SESSION['hear']) ||  count($_SESSION['hear']) == 0 )
+    {
+        redirectUrl('/pages');
+    }
+    //  gán danh sách giỏ hàng vào 1 mảng
+    $product = $_SESSION['hear'];
+    $product = array_values($product); $product = implode(',',$product);
+    $sql = "SELECT products.* , category_products.cpr_name FROM products 
+            LEFT JOIN category_products ON category_products.id = products.prd_category_product_id
+             WHERE products.ID IN (".$product.")";
+    $list  = Pagination::pagination('products',$sql,'page',9);
+
 
 ?>
     <!DOCTYPE html>
@@ -53,7 +54,7 @@ $list  = Pagination::pagination('products',$sql,'page',9);
                             <tbody>
                             <?php foreach($list as $key => $item) :?>
                                 <tr class="delete_tr">
-                                    <td><?= $key ?></td>
+                                    <td><?= $item['id'] ?></td>
                                     <td><?= $item['prd_name'] ?></td>
                                     <td>
                                         <img src="/public/uploads/products/<?= $item['prd_thunbar'] ?>" alt="" style="width:50px;height:50px;">

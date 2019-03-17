@@ -5,6 +5,7 @@
 <script src="/public/admin/js/adminlte.min.js"></script>
 <script src="/public/admin/js/demo.js"></script>
 <script src="/public/app/js/notify.js"></script>
+<script src="/public/app/js/jquery-confirm.min.js"></script>
 <script src="/public/admin/js/app.js"></script>
 <?php
     if( isset($_SESSION['success']))

@@ -2,7 +2,7 @@
     $modules = 'products';
     $title_global = 'Cập Nhật Sản Phẩm ';
     require_once __DIR__ .'/../../autoload.php';
-    $id = Input::get('id');
+    $id = (int)Input::get('id');
     $product = DB::fetchOne('products',$id);
     if( ! $product )
     {
@@ -18,6 +18,8 @@
         /**
          *  lay giá trị từ input
          */
+
+
         $name     = Input::get("prd_name");
         $cate       = Input::get("prd_category_product_id");
         $keywords   = Input::get("prd_keywords");
@@ -48,16 +50,14 @@
                 $_SESSION['hinhanh'] = $hinhanh;
             }
         }
-        else
-        {
-            $errors['hinhanh'] = "  Mời bạn chọn hình  ảnh!!! ";
-        }
+        
         //  chuyen doi mang chi muc - loai bo key trung nhau 
         if( isset ($errors ))
         {
             $errors = (array_unique(array_values($errors)));
         }
     
+
         // neu bien errors  thi ko co loi tien hanh insert
         if ( count($errors) == 1)
         {
@@ -75,7 +75,7 @@
                 'prd_content'                => $content,
                 'prd_price'                  => $price,
                 'prd_sale'                   => $sale,
-                'prd_thunbar'                => $hinhanh
+                'prd_thunbar'                => $hinhanh ?? $product['prd_thunbar']
             ];
     
             //tiến hành update 
@@ -86,7 +86,11 @@
                 // insert thanh cong
                 // gán session thông báo thành công
                 //chuyển về trang index trong thư mục category_products
-                move_uploaded_file($file_tmp,UPLOADS.'/products/'.$hinhanh);
+                if (isset($hinhanh))
+                {
+                    move_uploaded_file($file_tmp,UPLOADS.'/products/'.$hinhanh);    
+                }
+                
                 $_SESSION['success'] = "Cập nhật thành công ";
                 header("Location: ".baseServerName().'/admin/modules/products');exit();
             }
@@ -96,6 +100,7 @@
                 // giữ nguyên trang để nhập lai
                 $_SESSION['error'] = "Cập nhật thất bại  ";
                 header("Location: ".baseServerName().'/admin/modules/products');exit();
+                _dd("DIE");
             }
         }
     }

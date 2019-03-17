@@ -2,6 +2,9 @@
     require_once __DIR__ .'/../../autoload.php';
     $id = (int)Input::get('id');
     try{
+
+        $itemOrder = DB::delete('orders',' od_transaction_id = '.$id);
+        
         $iddelete = DB::delete('transactions',$id);
         // 
         ( $iddelete ) ? $_SESSION['success'] = ' Xoá Thành Công ' : $_SESSION['error'] = ' Xoá Thất Bại  ';

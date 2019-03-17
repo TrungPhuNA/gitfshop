@@ -45,6 +45,7 @@
                 //chuyển về trang index trong thư mục users
                 $_SESSION['success'] = " Xin chào " .$check['name'] . " đã đăng nhập vào hệ thống thành công ";
                 $_SESSION['admin_name'] = $check['name'];
+                $_SESSION['admin_id']   = $check['id'];
                 header("Location: ".baseServerName().'/admin');exit();
             }
             

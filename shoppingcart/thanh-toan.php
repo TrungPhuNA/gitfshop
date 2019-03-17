@@ -6,6 +6,13 @@
         redirectUrl('/pages');
     }
 
+    // kiem tra dang nhap
+    if (isset($_SESSION['id_user']))
+    {
+        $user = DB::fetchOne('users' , (int)$_SESSION['id_user']);
+    }
+
+
 
     //  gán danh sách giỏ hàng vào 1 mảng 
     $cartProduct = $_SESSION['cart'];
@@ -20,13 +27,35 @@
        $phone   = Input::get('phone');
        $address = Input::get('address');
 
-       $data = [
+        $data = [
             'tst_email'   => $email,
             'tst_name'    => $name,
             'tst_phone'   => $phone,
             'tst_address' => $address,
             'tst_total'   => $_SESSION['total']
-       ];
+        ];
+
+        // KIEM TRA  xem nếu thông tin nhập chưa đc đăng ký thì tự động đăng ký 
+        if (!isset($user))
+        {
+            $id_user  = DB::insert('users',array(
+                'name'     => $name,
+                'email'    => $email, 
+                'address'  => $address, 
+                'phone'    => $phone,
+                'password' => md5(12345)
+            ));
+
+            $data['tst_user_id'] = $id_user;
+        }
+
+
+        // neu da dang nhap thi luu them id user 
+        if ($user)
+        {
+            $data['tst_user_id'] = $user['id'];
+        }
+
         $idTransaction = DB::insert('transactions',$data);
 
         foreach($cartProduct as $key => $val)
@@ -37,8 +66,12 @@
                 'od_price'          => $val['price'],
                 'od_qty'            => $val['qty']
             ];
+
             $idOrder = DB::insert('orders',$order);
         }
+
+
+
         unset($_SESSION['cart']);
         $_SESSION['thongbao'] = ' Xác nhận thanh toán thành công ';
         redirectUrl('/shoppingcart/thong-bao.php');
@@ -74,24 +107,41 @@
                             
                                 <div class="panel-heading"> Thông tin thanh toán </div>
                                 <div class="panel-body">
-                                    
+                                    <?php if (isset($user)) :?>
                                         <div class="form-group">
                                             <label for="email"> Họ Và Tền <span style="color:red">(*)</span></label>
-                                            <input type="text" required="" class="form-control" id="email" placeholder=" Họ tên đầy đủ " name="name">
+                                            <input type="text" required="" autocomplete="off" readonly="" class="form-control" value="<?= $user['name'] ?>" id="email" placeholder=" Họ tên đầy đủ " name="name">
                                         </div>
                                         <div class="form-group">
                                             <label for="email">Email <span style="color:red">(*)</span></label>
-                                            <input type="email" required="" class="form-control" id="email" placeholder="Email cá nhân" name="email">
+                                            <input type="email" required="" autocomplete="off" readonly="" class="form-control" value="<?= $user['email'] ?>" id="email" placeholder="Email cá nhân" name="email">
                                         </div>
                                         <div class="form-group">
                                             <label for="email"> Địa chỉ  <span style="color:red">(*)</span></label>
-                                            <input type="text"  required="" class="form-control" id="email" placeholder="Địa chỉ nhận hàng" name="address">
+                                            <input type="text"  required="" autocomplete="off" readonly="" class="form-control" id="email" value="<?= $user['address'] ?>" placeholder="Địa chỉ nhận hàng" name="address">
                                         </div>
                                         <div class="form-group">
                                             <label for="email"> Số điện thoại  <span style="color:red">(*)</span></label>
-                                            <input type="number" required="" class="form-control" id="email" placeholder="Số điện thoại liên hệ " name="phone">
+                                            <input type="number" required="" autocomplete="off" readonly="" class="form-control" id="email" value="<?= $user['phone'] ?>" placeholder="Số điện thoại liên hệ " name="phone">
                                         </div>
-                                        
+                                    <?php else :?>
+                                        <div class="form-group">
+                                            <label for="email"> Họ Và Tền <span style="color:red">(*)</span></label>
+                                            <input type="text"  autocomplete="off" required="" class="form-control" id="email" placeholder=" Họ tên đầy đủ " name="name">
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="email">Email <span style="color:red">(*)</span></label>
+                                            <input type="email"  autocomplete="off" required="" class="form-control" id="email_user" placeholder="Email cá nhân" name="email">
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="email"> Địa chỉ  <span style="color:red">(*)</span></label>
+                                            <input type="text"   autocomplete="off" required="" class="form-control" id="email" placeholder="Địa chỉ nhận hàng" name="address">
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="email"> Số điện thoại  <span style="color:red">(*)</span></label>
+                                            <input type="number"  autocomplete="off" required="" class="form-control" id="email" placeholder="Số điện thoại liên hệ " name="phone">
+                                        </div>
+                                    <?php endif ;?>
                                     
                                 </div>
                                 <div class="panel-footer">

@@ -1,8 +1,9 @@
 <?php
     require_once __DIR__ .'/../../autoload.php';
-    $id = Input::get('id');
-    $sql = " SELECT orders.*  , products.prd_name as name ,products.prd_thunbar as hinhanh FROM  orders 
+    $id = (int)Input::get('id');
+    $sql = " SELECT orders.*  , transactions.tst_total ,products.prd_name as name ,products.prd_thunbar as hinhanh ,products.id as idsp FROM  orders 
         LEFT JOIN products ON products.id = orders.od_product_id
+        LEFT JOIN transactions ON transactions.id = orders.od_transaction_id
         WHERE 1 AND od_transaction_id = $id 
     ";
     $orders = DB::fetchsql($sql);
@@ -15,7 +16,8 @@
 <?php foreach ($orders as $key => $item) :?>
     <tr class="delete_tr">
         <td><?= $item['id'] ?></td>
-        <td> <?= $item['name'] ?></td>
+        <td><?= $item['idsp'] ?></td>
+        <td><?= $item['name'] ?></td>
         <td>
             <img src="/public/uploads/products/<?= $item['hinhanh'] ?>" alt="" style="width: 50px;height: 50px;">
         </td>

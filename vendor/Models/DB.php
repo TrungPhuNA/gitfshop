@@ -40,8 +40,8 @@
 
             if ( ! $check )
             {
+                dd(" Câu truy vấn : => " . '<b style="color:red">'.$sql.'</b>');
                 dd(" Insert thất bại ! Mời bạn kiểm tra dữ liệu truyền vào " );
-                dd(" SQL ==> ".$sql ." <==");die;
             }
 
             return mysqli_insert_id($that->link);
@@ -110,6 +110,7 @@
             $check = mysqli_query($that->link, $sql);
             if ( ! $check)
             {
+                dd(" Câu truy vấn : => " . '<b style="color:red">'.$sql.'</b>');
                 dd(" Update thất bại Dữ liệu truyền vào sai hoạc truy vấn của bạn không đúng ! Mời bạn xem lại ");die;
             }
             else
@@ -188,19 +189,21 @@
             }
             else
             {
-                $sql .= " WHERE " .$conditions ;
+                $sql .= " WHERE  " .$conditions ;
             }
 
             $check = mysqli_query($that->link,$sql);
+
+            // dd(" Câu truy vấn : => " . '<b style="color:red">'.$sql.'</b>');
+
             if ( ! $check)
             {
                 dd(" Câu truy vấn : => " . '<b style="color:red">'.$sql.'</b>');
                 dd(" Truy vấn thất bại Dữ liệu truyền vào sai hoạc truy vấn của bạn không đúng ! Mời bạn xem lại ");die;
             }
-            else
-            {
-                return mysqli_fetch_assoc($check);
-            }
+
+
+            return mysqli_fetch_assoc($check);
 
         }
 
@@ -280,7 +283,7 @@
             return $data;
         }
         public static function countTable($table)
-        { 
+        {
             $that = new self();
             $sql = "SELECT id FROM  {$table}";
             $result = mysqli_query($that->link, $sql) or die("Lỗi Truy Vấn countTable----" .mysqli_error($that->link));

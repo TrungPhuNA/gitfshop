@@ -12,6 +12,7 @@
     {
         $id = $_GET['idProduct'];
     }
+
     // kiem tra xem số lượng sản phẩm mua
     // có lớn hơn số lượng sản phẩm trong giỏ hàng không
     // nếu lơn hơn thì thông báo 
@@ -34,8 +35,9 @@
         }
         else 
         {
-            $_SESSION['cart'][$id]['qty'] = 1;
+            $_SESSION['cart'][$id]['qty'] = $qty;
         }
+        
         $_SESSION['cart'][$id]['name'] = $product['prd_name'];
         $_SESSION['cart'][$id]['img']   = $product['prd_thunbar'];
         $_SESSION['cart'][$id]['price'] = money($product['prd_price'],$product['prd_sale']);

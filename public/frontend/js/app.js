@@ -7,7 +7,8 @@ var frontend = {
      */
     
     configSelecter :{
-        base_Url: location.origin, // duong dan url 
+        base_Url: location.origin, // thay duong dan giong nhu cho css
+        // base_Url: 'http://localhost:8080/basephp'
     },
     init : function () {
         let _this = this;
@@ -18,6 +19,9 @@ var frontend = {
         _this.clickItemResultSearch();
         _this.addFavorite() ; // them san pham yeu thich
         _this.removeItemFavorite() ; // xoa san pham yeu thich
+        _this.checkEmailUSer(); // kiem tra ton tai email,
+        _this.clickAppendDataItemComment(); //update-item-comment
+        _this.clickOptionLike();// xu ly like dislike
     },
     addCart()
     {
@@ -146,6 +150,11 @@ var frontend = {
                     {
                         $.notify(' Cập nhật qty trong giỏ hàng thất bại ','error'); 
                     }
+
+                    
+                    setTimeout(function(){
+                        window.location.href = location.href;
+                    }, 1000);
                 },
                 error : function () {
                     console.log(" LOI AJAX ");
@@ -228,8 +237,123 @@ var frontend = {
             console.log($key);
         })
     },
+
+    checkEmailUSer : function()
+    {
+        let _this = this;
+        $("#email_user").mouseleave(function(){
+        
+            let email = $(this).val();
+            let $this = $(this);
+            if (email)
+            {
+                $.ajax({
+                    type: "GET",
+                    url:  _this.configSelecter.base_Url + '/shoppingcart/check_email.php',
+                    data: { email : email},
+                    success: function( msg ) {
+                        console.log(msg);
+                        if( msg == 0)
+                        {
+                            $this.css('border','1px solid red');
+                            $this.val('');
+                            $.notify('Email đã tồn tại ! Mời bạn đăng nhập với email này và password mặc định là 12345','error');
+                        }
+                    },
+                    error : function () {
+                        console.log(" LOI AJAX ");
+                    }
+                });
+            }
+            
+        })
+    },
+
+    clickAppendDataItemComment : function()
+    {
+        $(".update-item-comment").click(function(){
+            let $this = $(this);
+            let id_comment  = $this.attr('data-comment');
+            let id_product  = $this.attr('data-id');
+
+            let content     = $this.parents('.media').find('.main-comment').html();
+            console.log($.trim(content))
+
+            console.log(id_comment + id_product);
+        })
+    },
+
+    clickOptionLike : function () {
+        let _this = this;
+        $(".option_like").click(function (event) {
+            event.preventDefault();
+
+            let $this = $(this);
+
+            let option = $this.attr('data-type');
+            let id_comment = $this.attr('data-comment-id');
+            let id_product = $this.attr('data-product-id');
+
+            // console.log(option + id_comment + id_product);
+
+            $.ajax({
+                type: "get",
+                url:  _this.configSelecter.base_Url + '/icon/like.php',
+                data: { option : option ,id_comment : id_comment, id_product : id_product},
+                success: function( msg ) {
+
+                    let data = JSON.parse(msg);
+                    console.log(data);
+                    switch (data.code) {
+                        case 0:
+                            $.notify('Bạn phải đăng nhập mới thực hiện được chức năng này','error');
+                            break;
+                        case 1:
+                            $.notify('Bạn đã ' + option + ' thành công ' ,'success');
+                            break;
+                        case 2:
+                            $.notify('Bạn đã ' + option + ' thành công ' ,'success');
+                            break;
+                        default:
+                            if (option == 'like')  option = ' dislike ' ;
+                            $.notify(' Bạn phải huỷ bỏ '+option+ ' trước khi thực hiện thao tác này ','wraning');
+                            break;
+                    }
+                    
+                },
+                error : function () {
+                    console.log(" LOI AJAX ");
+                }
+            });
+
+        })
+    }
 }
 
 $(function () {
     frontend.init()
+})
+
+$( function(){
+    $(".comfirm_delete").click(function (event) {
+        event.preventDefault();
+        let url = $(this).attr("href");
+        $.confirm({
+            title: ' Xoá dữ liệu',
+            content: ' Dữ liệu xoá đi không thể khôi phục hãy cân nhắc nhé !!!',
+            type: 'green',
+            buttons: {
+                ok: {
+                    text: "ok!",
+                    btnClass: 'btn-danger',
+                    keys: ['enter'],
+                    action: function(){
+                        console.log(this)
+                        location.href = url;
+                    }
+                },
+                cancel: function(){}
+            }
+        });
+    })
 })

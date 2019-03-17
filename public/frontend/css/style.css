@@ -49,7 +49,7 @@ h1,h2,h3,h4,h5,h6
     borrder:1px solid red;
 }
 .active-menu a{
-    background: #666 !important;
+    background: ##footer !important;
 }
  .color-red { color: red !important }
 /* =================HEADER================== */
@@ -239,7 +239,7 @@ h1,h2,h3,h4,h5,h6
 {
     color: white;
     font-weight:bold;
-    background-color: #d11618;;
+    background-color: #4CAF50;;
     line-height: 40px;
     text-transform: uppercase;
     font-size: 12px;
@@ -429,6 +429,14 @@ h1,h2,h3,h4,h5,h6
     color: #999;
     font-size: 14px;
     font-weight: bold;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    width: 100%;
+    display: block;
+    -webkit-line-clamp: 2;
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    text-transform: lowercase;
 }
 .info-item a:hover
 {
@@ -443,6 +451,12 @@ h1,h2,h3,h4,h5,h6
 {
     position: relative;
     padding-top: 15px !important;
+    height: 266px;
+}
+
+.item-product  a img
+{
+    height: 180px;
 }
 
 
@@ -486,7 +500,7 @@ h1,h2,h3,h4,h5,h6
 
 #footer
 {
-    background: #444;
+    background: #0f4421;
     padding: 10px;
     color: white;
     margin-top: 20px;
@@ -607,7 +621,7 @@ h1,h2,h3,h4,h5,h6
 
 #shareicon
 {
-    background: #3A3A3A;
+    background: #0f4421;
 }
 
 #shareicon ul li 
@@ -704,3 +718,26 @@ h1,h2,h3,h4,h5,h6
     background: #DDDDDD;
     color: #444;
 }
+.notifyjs-corner
+{
+    z-index:9999999999999999999999999 !important;
+}
+#content-comment .media { border:1px solid white;border-bottom-color:#d3d3d3;padding:5px;}
+#content-comment .media:hover {  cursor: pointer;border:1px solid #d3d3d3;}
+#content-comment .media:hover .hidenitem {  
+    display:block;
+    position: absolute;
+    right: 0;
+    top: 50%;
+    transform: translateY(-50%);
+}
+
+
+
+
+
+
+
+
+
+

@@ -2,7 +2,7 @@
 $modules = 'posts';
 $title_global = 'Cập nhậtbài viết';
 require_once __DIR__ .'/../../autoload.php';
-$id = Input::get('id');
+$id = (int)Input::get('id');
 $post = DB::fetchOne('posts',$id);
 if( ! $post )
 {

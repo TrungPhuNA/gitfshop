@@ -25,13 +25,14 @@
      */
     
     $dates = date('Y-m-d');
-    // while (date('w', strtotime($dates)) != 1) {
-    //     $tmp = strtotime('-1 day', strtotime($dates));
-    //     $dates = date('Y-m-d', $tmp);
-    // }
+    while (date('w', strtotime($dates)) != 1) {
+        $tmp = strtotime('-1 day', strtotime($dates));
+        $dates = date('Y-m-d', $tmp);
+    }
  
     $week = date('W', strtotime($dates));
-    $sqltime4 = "SELECT SUM(tst_total) as doanhthu FROM transactions WHERE 1 AND tst_status = 1 AND WEEK(tst_date_payment) =  $week";
+    $sqltime4 = "SELECT SUM(tst_total) as doanhthu FROM transactions WHERE 1 AND tst_status = 1 AND WEEK(tst_date_payment,0) =  $week";
+
     $amountWeek = DB::fetchsql($sqltime4);
 
     // tong doanh thu

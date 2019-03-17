@@ -14,7 +14,14 @@
 	#chuyển hướng file lỗi 
 	ErrorDocument 404 http://basephp.loca/pages
 
-    Redirect 301 http://basephp.loca/ http://basephp.loca/pages/
+    #Redirect  http://basephp.loca/pages/ http://basephp.loca/
 
+    RewriteRule index.html index.php
+
+    # chi tiet san pham
+    RewriteRule ^san-pham/([a-zA-Z0-9_-]+)-([0-9]+).html$ chi-tiet-san-pham.php?id=$2
+
+    # chi tiet tin tuc
+    RewriteRule ^tin-tuc/([a-zA-Z0-9_-]+)-([0-9]+).html$ chi-tiet.php?id=$2
 
 </IfModule>

@@ -126,13 +126,13 @@
                                                 <div class="col-sm-3">
                                                     <div class="radio">
                                                         <label>
-                                                        <input type="radio" name="cpr_active" id="optionsRadios2" value="1">
+                                                        <input type="radio" name="cpr_active" id="optionsRadios2" value="1" checked="">
                                                         Có
                                                         </label>
                                                     </div>
                                                     <div class="radio">
                                                         <label>
-                                                        <input type="radio" name="cpr_active" id="optionsRadios1" value="0" checked="">
+                                                        <input type="radio" name="cpr_active" id="optionsRadios1" value="0" >
                                                         Không
                                                         </label>
                                                     </div>

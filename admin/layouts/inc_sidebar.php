@@ -1,16 +1,7 @@
 <aside class="main-sidebar">
     <!-- sidebar: style can be found in sidebar.less -->
     <section class="sidebar">
-        <!-- Sidebar user panel -->
-        <div class="user-panel">
-            <div class="pull-left image">
-                <img src="/public/admin/images/user2-160x160.jpg" class="img-circle" alt="User Image">
-            </div>
-            <div class="pull-left info">
-                <p>Chu Văn Thắng</p>
-                <a href="#"><i class="fa fa-circle text-success"></i> Online</a>
-            </div>
-        </div>
+      
         <!-- sidebar menu: : style can be found in sidebar.less -->
         <ul class="sidebar-menu" data-widget="tree">
             <li class="header">Bảng Điều Khiển</li>
@@ -26,7 +17,7 @@
             </li>
             <li class="header"> Sản phẩm  </li>
             <li class="<?= isset($modules) && $modules == 'cate-products' ? 'active' : ''?>">
-                <a href="/admin/modules/cate-products"><i class="fa fa-list"></i> <span>Danh mục</span></a>
+                <a href="/admin/modules/cate-products"><i class="fa fa-database "></i> <span>Danh mục</span></a>
             </li>
             <li class="<?= isset($modules) && $modules == 'products' ? 'active' : ''?>">
                 <a href="/admin/modules/products"><i class="fa fa-book"></i> <span>Sản phẩm</span></a>
@@ -34,11 +25,14 @@
             <li class="<?= isset($modules) && $modules == 'transactions' ? 'active' : ''?>">
                 <a href="/admin/modules/transactions"><i class="fa fa-book"></i> <span> Đơn hàng </span></a>
             </li>
+            <li class="<?= isset($modules) && $modules == 'comment' ? 'active' : '' ?>">
+                <a href="/admin/modules/comments"><i class="fa fa-comment"></i> Quản lý comment </a>
+            </li>
+            <li class="<?= isset($modules) && $modules == 'feedback' ? 'active' : '' ?>">
+                <a href="/admin/modules/feedback"><i class="fa fa-comment"></i> Quản lý phản hồi </a>
+            </li>
             <li class="<?= isset($modules) && $modules == 'warehouses' ? 'active' : ''?>">
                 <a href="/admin/modules/warehouses"><i class="fa fa-book"></i> <span> Quản lý kho </span></a>
-            </li>
-            <li class="">
-                <a href="/admin/modules/modules"><i class="fa fa-book"></i> <span>Modules</span></a>
             </li>
         </ul>
     </section>

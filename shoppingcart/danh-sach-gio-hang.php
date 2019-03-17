@@ -3,8 +3,9 @@
     // kiểm tra xem giỏ hàng có tồn tại không 
     if( ! isset($_SESSION['cart']) ||  count($_SESSION['cart']) == 0 )
     {
-        redirectUrl('/pages');
+        redirectUrl('/');
     }
+
     if($_SERVER['REQUEST_METHOD'] == 'POST')
     {
        
@@ -14,11 +15,52 @@
     $sum = 0 ;
 ?>
 <!DOCTYPE html>
+
+
 <html>
     <head>
         <title> Danh sách giỏ hàng  </title>
         <meta charset="utf-8">
         <?php require_once __DIR__.'/../layouts/inc_head.php'; ?>
+        <style type="text/css">
+            .load-wrapp {
+                float: left;
+                border-radius: 5px;
+                text-align: center;
+                display: none;
+
+                /* style them */
+                position: absolute;
+                top: 8px;
+                left: 50%;transform: translateX(-50%);
+            }
+
+            .load-wrapp p {padding: 0 0 20px;}
+            .load-wrapp:last-child {margin-right: 0;}
+            .ring-1 {
+                width: 10px;
+                height: 10px;
+                margin: 0 auto;
+                padding: 10px;
+                border: 7px dashed #4b9cdb;
+                border-radius: 100%;
+            }
+
+
+
+            /* =Animate the stuff
+            ------------------------ */
+            
+
+            .load-4 .ring-1 {animation: loadingD 1.5s .3s cubic-bezier(.17,.37,.43,.67) infinite;}
+
+        
+            @keyframes loadingD {
+                0 {transform: rotate(0deg);}
+                50% {transform: rotate(180deg);}
+                100% {transform: rotate(360deg);}
+            }
+        </style>
     </head>
     <body>
         <div id="wrapper">
@@ -41,12 +83,13 @@
                             <div class="panel-body">
                                 <table class="table">
                                     <thead>
+
                                         <tr>
                                             <th>STT</th>
                                             <th>Tên Sản Phẩm </th>
                                             <th>Hình Ảnh</th>
                                             <th> Giá </th>
-                                            <th> Số Lượng </th>
+                                            <th style="width: 10%"> Số Lượng </th>
                                             <th> Thành Tiền </th>
                                             <th> Thao Tác </th>
                                         </tr>
@@ -61,7 +104,7 @@
                                             </td>
                                             <td><?= formatPrice($item['price']) ?>đ</td>
                                             <td>
-                                                <input type="number" name="qty" id="qty" value="<?= $item['qty'] ?>" class="form-control" style="width:20%">
+                                                <input type="number" name="qty" id="qty" value="<?= $item['qty'] ?>" class="form-control item-qty-cart" style="width:100%">
                                             </td>
                                             <td><?= formatPrice($item['price']* $item['qty']) ?>đ</td>
                                             <td> 
@@ -85,9 +128,10 @@
                             </div>
                             <div class="panel-footer">
                                 <div class="pull-right">
-                                    <a href="" class="btn btn-xs btn-danger">Tiếp tục mua hàng </a>
+                                    <a href="/" class="btn btn-xs btn-danger">Tiếp tục mua hàng </a>
                                     <a href="thanh-toan.php" class="btn btn-xs btn-success">Tiến hành thanh toán  </a>
                                 </div>
+
                                 <div class="clearfix"></div>
                             </div>
                         </div>

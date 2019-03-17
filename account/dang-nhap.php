@@ -34,8 +34,10 @@
                 // insert thanh cong
                 // gán session thông báo thành công
                 //chuyển về trang index trong thư mục users
-                $_SESSION['success'] = "Thêm mới thành công ";
+                $_SESSION['success']  = " Đăng nhập thành công ";
                 $_SESSION['username'] = $check['name'];
+                $_SESSION['id_user']  = $check['id'];
+                $_SESSION['img_user'] = $check['avatar'];
                 header("Location: ".baseServerName().'/pages');exit();
             }
             
@@ -125,7 +127,7 @@
                         <!-- SLIDE -->
                         <section style="padding: 20px;">
                             <div class="panel panel-primary">
-                                  <div class="panel-heading"> Đăng nhập  </div>
+                                  <div class="panel-heading"> Đăng nhập thành viên  </div>
                                   <div class="panel-body">
                                       <form class="form-horizontal" action="" method="POST">
                                        

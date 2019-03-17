@@ -10,6 +10,9 @@
      */
     $id = (int)Input::get('id');
 
+    // lay id admin 
+    $id_admin = (int)$_SESSION['admin_id'];
+
     /**
      * lấy id cần  sửa 
      * kiểm tra xem có tồn tại trong csdl không 
@@ -28,8 +31,9 @@
     }
   
     $time_pay = date('Y-m-d');  
-    $hot = $transaction['tst_status'] == 1 ? 0 : 1;
-    $update = DB::update("transactions",array('tst_status' => $hot,'tst_date_payment' => $time_pay) ,array("id" => $id));
+    $status = $transaction['tst_status'] == 1 ? 0 : 1;
+    $update = DB::update("transactions",array('tst_status' => $status,'tst_date_payment' => $time_pay,'tst_admin_id' => $id_admin) ,array("id" => $id));
+
     if ( $update && $update > 0 )
     {
         $orders = DB::query('orders','*',' and od_transaction_id = '. $id);
@@ -39,8 +43,9 @@
                 $product = DB::fetchOne('products',(int)$item['od_product_id']);
                 if( $product )
                 {
-                    $pay    = ($hot  == 1) ? $product['prd_pay'] + 1 : $product['prd_pay'] - 1;
-                    $upPay  = DB::update("products",array('prd_pay' => $pay) ,array("id" => (int)$item['od_product_id']));
+                    $pay    = ($status  == 1) ? $product['prd_pay'] + $item['od_qty'] : $product['prd_pay'] - $item['od_qty'];
+                    $number = ($status  == 1) ? $product['prd_number'] - $item['od_qty'] : $product['prd_number'] + $item['od_qty'];
+                    $upPay  = DB::update("products",array('prd_pay' => $pay,'prd_number' => $number) ,array("id" => (int)$item['od_product_id']));
                 }
             }
         }

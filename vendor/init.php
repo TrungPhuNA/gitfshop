@@ -5,7 +5,7 @@
 	require_once __DIR__."/Utils/Input.php";
     require_once __DIR__."/Utils/Session.php";
     require_once __DIR__."/Utils/Url.php";
-	require_once __DIR__."/Models/DB.php";	
+	require_once __DIR__."/Models/DB.php";
     require_once __DIR__."/Models/Pagination.php";
 
 ?>

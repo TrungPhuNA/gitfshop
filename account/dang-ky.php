@@ -72,7 +72,8 @@
                 //chuyển về trang index trong thư mục users
                 $_SESSION['success'] = "Thêm mới thành công ";
                 $_SESSION['username'] = $name;
-                header("Location: ".baseServerName().'/pages');exit();
+                $_SESSION['id_user']  = $id_insert;
+                header("Location: ".baseServerName());exit();
             }
             
         }
@@ -159,7 +160,7 @@
                     <div class="col-md-9 bor">
                         <!-- SLIDE -->
                         <section style="padding: 20px;">
-                             <div class="panel panel-primary">
+                             <div class="panel panel-primary" >
                                   <div class="panel-heading"> Đăng ký thành viên </div>
                                   <div class="panel-body">
                                       <form class="form-horizontal" action="" method="POST">
@@ -175,7 +176,7 @@
                                         <div class="form-group">
                                             <label class="control-label col-sm-2" for="email">Email <span style="color: red">(*)</span></label>
                                             <div class="col-sm-10">
-                                                <input type="email" class="form-control" value="<?= isset($email) ? $email : '' ?>" placeholder=" user@gmail.com" name="email">
+                                                <input type="email" class="form-control" value="<?= isset($email) ? $email : '' ?>" placeholder="demo@gmail.com" name="email">
                                                 <?php if(isset($errors['email'])) :?>
                                                     <span class="color-red"><i class="fa fa-bug"></i><?= $errors['email'] ?></span>
                                                 <?php endif ;?>
@@ -184,7 +185,7 @@
                                          <div class="form-group">
                                             <label class="control-label col-sm-2" for="email"> Số điện thoại <span style="color:red">(*)</span></label>
                                             <div class="col-sm-10">
-                                                <input type="number" class="form-control" value="<?= isset($phone) ? $phone : '' ?>" placeholder=" 0986.222.333 " name="phone">
+                                                <input type="number" class="form-control" value="<?= isset($phone) ? $phone : '' ?>" placeholder="0973114434" name="phone">
                                                 <?php if(isset($errors['phone'])) :?>
                                                     <span class="color-red"><i class="fa fa-bug"></i><?= $errors['phone'] ?></span>
                                                 <?php endif ;?>

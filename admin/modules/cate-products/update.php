@@ -3,13 +3,18 @@
     $title_global = 'Cập nhật danh mục sản ';
     require_once __DIR__ .'/../../autoload.php';
 
-    $id = Input::get('id');
+    $id = (int)Input::get('id');
+
     $cate = DB::fetchOne('category_products',$id);
+    
+    // kiem tra neu ko ton tai danh muc thi chuyen ve trang danh sach danh muc  
     if( ! $cate )
     {
         $_SESSION['error'] = "  Không tồn tại dữ liệu ";
         header("Location: ".baseServerName().'/admin/modules/cate-products');exit();
     }
+
+
     if($_SERVER['REQUEST_METHOD'] == 'POST')
     {
         /**
@@ -29,7 +34,7 @@
             // check trung 
             if( $name != $cate['cpr_name'])
             {
-                $checkName = DB::fetchOne("category_products" ," cpr_name  = ". $name);
+                $checked = DB::fetchOne("category_products" ," cpr_name  = "."'.$name.'");
                 if( $checked )
                 {
                     $errors['cpr_name'] = ' Tên danh mục đã tồn tại ';
@@ -48,6 +53,7 @@
                 'cpr_active'   => $active ,
                 'cpr_sort'   => $sort 
             ];
+
             //tiến hành update 
             $id_update = DB::update('category_products',$data , ' id = '.$id);
 

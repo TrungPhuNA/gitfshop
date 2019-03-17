@@ -69,6 +69,7 @@ if( ! function_exists( 'baseServerName'))
         return 'http://'.$_SERVER["SERVER_NAME"];
     }
 }
+
 if ( ! function_exists('redirectUrl'))
 {
     function redirectUrl($url = '')
@@ -76,6 +77,7 @@ if ( ! function_exists('redirectUrl'))
         header("location: ".baseServerName()."{$url}");exit();
     }
 }
+
 if ( ! function_exists( 'curPageURL' ))
 {
     /**
@@ -156,4 +158,20 @@ if( ! function_exists( '' ))
 		    rmdir($dir);
 	  	}
 	}
+}
+
+if (!function_exists('get_start_and_time'))
+{
+    function get_start_and_time($date_range, $config=[])
+    {
+        $dates = explode(' - ', $date_range);
+
+        $start_date = date('Y-m-d', strtotime($dates[0]));
+        $end_date = date('Y-m-d', strtotime($dates[1]));
+
+        return [
+            'start' => $start_date,
+            'end' => $end_date
+        ];
+    }
 }

@@ -15,12 +15,29 @@
         $sql .= ' AND tst_email LIKE \'%'.Input::get('email').'%\'' ;
         $filter['email'] = Input::get('email');
     }
+
     if ( Input::get('id') ) {
         $sql .= ' AND id = '.Input::get('id') ;
         $filter['id'] = Input::get('id');
     }
+
+    if ( Input::get('status') ) {
+        $status = Input::get('status') == 2 ? 0 : 1;
+        $sql .= ' AND tst_status = '. $status ;
+        $filter['status'] = Input::get('status');
+    }
+
+    if ( Input::get('time') ) {
+        $time = Input::get('time');
+        $date = get_start_and_time($time);
+
+        $sql .= " AND tst_date_payment BETWEEN  '".$date['start']."' AND '".$date['end']."' ";
+        $filter['time'] = Input::get('time');
+    }
+    
     $transactions = Pagination::pagination('transactions',$sql,'page',9);
 ?>
+
 
 <!DOCTYPE html>
 <html>
@@ -31,6 +48,18 @@
         <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
         <?php require_once __DIR__ .'/../../layouts/inc_css.php'; ?>
         <!-- <link rel="stylesheet" href="/public/admin/css/bootstrap-tagsinput.css"> -->
+        <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.css" />
+        <style type="text/css">
+            #reportrange { position: relative; }
+            #reportrange:before {
+                content : "\f073";
+                position: absolute;
+                font-family: FontAwesome;
+                top: 50%;
+                transform: translateY(-50%);
+            }
+            /*<i class="fa fa-calendar"></i>&nbsp;*/
+        </style>
     </head>
     <body class="hold-transition skin-blue fixed sidebar-mini">
         <!-- Site wrapper -->
@@ -55,7 +84,7 @@
                 <!-- Main content -->
                 <section class="content">
                     <!-- Default box -->
-                    <div class="box <?= empty($filter) ? 'collapsed-box' : ''  ?>">
+                    <div class="box">
                         <div class="box-header with-border">
                             <h3 class="box-title"> Bộ Lọc Tìm Kiếm </h3>
 
@@ -80,9 +109,21 @@
                                 <div class="form-group col-sm-1">
                                     <input type="number" name="id" class="form-control" value="<?= Input::get('id') ?>" placeholder="ID">
                                 </div>
+                                <div id="reportrange" style="background: #fff; cursor: pointer;border-radius: 2px" class="form-group col-sm-3">
+                                    <input type="text" style="text-indent: 13px;"  value="<?= Input::get('time') ? Input::get('time') : '' ?>" name="time" autocomplete="off" placeholder="Lọc thời gian" class="form-control w-300 time_processing">
+                                </div>
+
+                                <div class="form-group col-sm-2">
+                                    <select class="form-control" name="status">
+                                        <option>-- Trạng thai --</option>
+                                        <option value="1" <?= Input::get('status') && Input::get('status') == 1? "selected = 'selected'" : "" ?>>Đã thanh toán</option>
+                                        <option value="2" <?= Input::get('status') && Input::get('status') == 2? "selected = 'selected'" : "" ?>>Chưa thanh toán</option>
+                                    </select>
+                                </div>
+
                                 <div class="form-group col-sm-3">
-                                    <input type="submit" value="Tìm Kiếm" class="btn btn-xs btn-success">
-                                    <a  href="index.php" class="btn btn-xs btn-danger"> Làm mới<a/>
+                                    <input type="submit" value="Tìm Kiếm" class="btn  btn-success">
+                                    <a  href="index.php" class="btn  btn-danger"> Làm mới<a/>
                                 </div>
                                 
                                 
@@ -90,38 +131,37 @@
                         </div>
                     </div>
                     <div class="box">
-                        <div class="box-header with-border">
-                            <a href="/public/admin/news/categorys/add" class="btn btn-xs btn-success"><i class="fa fa-plus"></i> Thêm mới </a>
-                            
-                        </div>
+                        
                         <div class="box-body">
                             <div class="box-body table-responsive no-padding">
                                 <table class="table table-hover">
                                     <tbody>
                                         <tr>
                                             <th>ID</th>
-                                            <th>Name</th>
+                                            <th>Họ Tên</th>
                                             <th>Email</th>
-                                            <th>Phone</th>
-                                            <th>Address</th>
-                                            <th>Pay</th>
-                                            <th>Status</th>
-                                            <th>Action</th>
+                                            <th>Số đt</th>
+                                            <th>Địa chỉ</th>
+                                            <th>Tổng tiền</th>
+                                            <th>Trạng thái</th>
+                                            <th>Ngày Xử Lý</th>
+                                            <th>Thao tác</th>
                                         </tr>
                                         <?php foreach ($transactions as $key => $item) :?>
-                                            <tr>
+                                            <tr class="item_product">
                                                 <td> <?= $item['id'] ?></td>
-                                                <td><?= $item['tst_name'] ?></td>
+                                                <td><span class="name"><?= $item['tst_name'] ?></span></td>
                                                 <td><?= $item['tst_email'] ?></td>
                                                 <td><?= $item['tst_phone'] ?></td>
                                                 <td><?= $item['tst_address'] ?></td>
-                                                <td><?= formatPrice($item['tst_total']) ?> đ</td>
+                                                <td><span class="total"><?= formatPrice($item['tst_total']) ?> đ</span></td>
                                                 <td>
                                                     <a href="status.php?id=<?= $item['id'] ?>" class="custome-btn label <?= $item['tst_status'] == 1 ? 'label-info' : 'label-default' ?>"><span> <?= $item['tst_status'] == 1 ? ' Đã thanh toán ' : ' Chưa thanh toán ' ?></span></a>
                                                 </td>
+                                                <td><?= $item['tst_date_payment'] ?></td>
                                                 <td>
-                                                    <a href="javascript:;void(0)" class="custome-btn btn-info btn-xs item-order" data-id=<?= $item['id' ] ?>><i class="fa fa-pencil-square"></i> Xem chi tiết </a>
-                                                    <a href="delete.php?id=<?=1?>" class="custome-btn btn-danger btn-xs delete" ><i class="fa fa-trash"></i> Huỷ đơn hàng  </a>
+                                                    <a data-toggle="tooltip" title="Xem chi tiết" href="javascript:;void(0)" class="custome-btn btn-info btn-xs item-order" data-id=<?= $item['id' ] ?>><i class="fa fa-pencil-square"></i>  </a>
+                                                    <a data-toggle="tooltip" title="Xoá đơn hàng" href="delete.php?id=<?= $item['id']?>" class="custome-btn btn-danger btn-xs comfirm_delete" ><i class="fa fa-trash"></i>  </a>
                                                 </td>
                                             </tr>
                                         <?php endforeach ; ?>
@@ -134,10 +174,9 @@
                         <!-- /.box-body -->
                         <div class="box-footer">
                             <div class="custome-paginate">
-                                <div class="pull-left">
-                                    <p>Trang 1 - Số bản ghi hiển thị 20 - Tổng số trang 1 - Tổng số bản ghi 3</p>
+                                <div class="pull-right">
+                                    <?php echo Pagination::getListpage($filter) ?>
                                 </div>
-                                <div class="pull-right"></div>
                             </div>
                         </div>
                         <!-- /.box-footer-->
@@ -150,14 +189,16 @@
                     <div class="modal-content">
                         <div class="modal-header">
                             <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
-                            <h4 class="modal-title"> Chi tiết đơn hàng </h4>
+                            <h4 class="modal-title"> Chi tiết đơn hàng | <span>Họ Tên <b id="auth-transaction" style="color: red"></b></span> | <span>Tổng tiền <b id="total-transaction" style="color: red"></b></span></h4>
+                            
                         </div>
                         <div class="modal-body">
                             <table class="table table-hover" id="vieworder-content">
                                 <tbody>
                                     <tr class="bg-tr">
                                         <th>ID</th>
-                                        <th>Tên sản phẩm</th>
+                                        <th>ID SP</th>
+                                        <th style="width: 40%">Tên sản phẩm</th>
                                         <th> Hình ảnh </th>
                                         <th class="text-center">Giá </th>
                                         <th>Số Lượng</th>
@@ -180,3 +221,32 @@
             <?php require_once __DIR__ .'/../../layouts/inc_footer.php'; ?>
         </div>
         <?php require_once __DIR__ .'/../../layouts/inc_js.php'; ?>
+        <script type="text/javascript" src="https://cdn.jsdelivr.net/momentjs/latest/moment.min.js"></script>
+        <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.min.js"></script>
+        <script>
+            $(document).ready(function(){
+                $('[data-toggle="tooltip"]').tooltip();   
+            });
+
+            $('#reportrange input').daterangepicker({
+                autoUpdateInput: false,
+                locale: {
+                    cancelLabel: 'Clear'
+                },
+                ranges: {
+                    'Hôm nay': [moment(), moment()],
+                    'Hôm qua': [moment().subtract(1, 'days'), moment().subtract(1, 'days')],
+                    '7 ngày trước': [moment().subtract(6, 'days'), moment()],
+                    '30 ngày trước': [moment().subtract(29, 'days'), moment()],
+                    'Tháng này': [moment().startOf('month'), moment().endOf('month')],
+                    'Tháng trước': [moment().subtract(1, 'month').startOf('month'), moment().subtract(1, 'month').endOf('month')]
+                }
+            })
+            .on('apply.daterangepicker', function (ev, picker) {
+                $(this).val(picker.startDate.format('MM/DD/YYYY') + ' - ' + picker.endDate.format('MM/DD/YYYY'));
+            })
+            .on('cancel.daterangepicker', function (ev, picker) {
+                $(this).val('');
+            });
+
+        </script>

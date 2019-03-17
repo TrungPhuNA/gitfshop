@@ -32,10 +32,7 @@
                     <div class="container-pluid">
                         <div class="container">
                             <div class="col-md-3" id="ft-about">
-                                
-                                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
-                                tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
-                                quis nostrud exercitation ullamco </p>
+                                <p> Tên tôi là ABC.</p>
                             </div>
                             <div class="col-md-3 box-footer" >
                                 <h3 class="tittle-footer"> Danh mục sản phẩm </h3>
@@ -43,40 +40,39 @@
                                     <?php foreach($categoHot as $item) :?>
                                         <li>
                                             <i class="fa fa-angle-double-right"></i>
-                                            <a href="/pages/danh-muc-san-pham.php?id=<?= $item['id'] ?>"><i></i> <?= $item['cpr_name'] ?></a>
+                                            <a href="/danh-muc-san-pham.php?id=<?= $item['id'] ?>"><i></i> <?= $item['cpr_name'] ?></a>
                                         </li>
                                     <?php endforeach ; ?>
                                 </ul>
                             </div>
                             <div class="col-md-3 box-footer">
-                                <h3 class="tittle-footer">my accout</h3>
+                                <h3 class="tittle-footer"> Thông tin </h3>
                                <ul>
                                     <li>
                                         <i class="fa fa-angle-double-right"></i>
-                                        <a href="/pages/gioi-thieu.php"><i></i> Giới thiệu</a>
+                                        <a href="/gioi-thieu.php"><i></i> Giới thiệu</a>
                                     </li>
                                     <li>
                                         <i class="fa fa-angle-double-right"></i>
                                         <a href=""><i></i> Liên hệ </a>
                                     </li>
-                                    <li>
+                                    <!-- <li>
                                         <i class="fa fa-angle-double-right"></i>
                                         <a href=""><i></i>  Contact </a>
                                     </li>
                                     <li>
                                         <i class="fa fa-angle-double-right"></i>
                                         <a href=""><i></i> My Account</a>
-                                    </li>
+                                    </li> -->
                                 </ul>
                             </div>
                             <div class="col-md-3" id="footer-support">
                                 <h3 class="tittle-footer"> Liên hệ</h3>
                                 <ul>
                                     <li>
-                                        
-                                        <p><i class="fa fa-home" style="font-size: 16px;padding-right: 5px;"></i> Ngách 56/34 số nhà 22 phường đức thắng </p>
-                                        <p><i class="sp-ic fa fa-mobile" style="font-size: 22px;padding-right: 5px;"></i> 012345678</p>
-                                        <p><i class="sp-ic fa fa-envelope" style="font-size: 13px;padding-right: 5px;"></i> support@gmail.com</p>
+                                        <p><i class="fa fa-home" style="font-size: 16px;padding-right: 5px;"></i> 378 Quang Trung Hà Đông - Hà Nội</p>
+                                        <p><i class="sp-ic fa fa-mobile" style="font-size: 22px;padding-right: 5px;"></i> 12121</p>
+                                        <p><i class="sp-ic fa fa-envelope" style="font-size: 13px;padding-right: 5px;"></i>12121@gmail.com</p>
                                     </li>
                                 </ul>
                             </div>
@@ -84,31 +80,38 @@
                     </div>
                 </section>
                 <section id="ft-bottom">
-                    <p class="text-center">Copyright © 2017 . Design by  ... !!! </p>
+                    <p class="text-center">Đồ án tốt nghiệp 2019 ...!!! </p>
                 </section>
             </div>
         </div>      
     </div>
             </div>      
         </div>
+
+        <div class="qc__left" style="position: fixed;left: 40px; top: 30%;">
+            <a href=""><img src="/public/images/banner1.png"></a>
+        </div>
+        <div class="qc__right" style="position: fixed;right: 40px; top: 30%;">
+            <a href=""><img src="/public/images/banner1.png"></a>
+        </div>
     <script  src="/public/frontend/js/slick.min.js"></script>
     <script  src="/public/frontend/js/app.js"></script>
     <script  src="/public/app/js/notify.js"></script>
     </body>
-    <style type="text/css">
+    <!-- <style type="text/css">
         #left_ads_float{bottom:24px;left: 10px;position:fixed;top: 200px; }
         #right_ads_float{bottom:24px;right: 10px;position:fixed;top: 200px;}
     </style>
     <div id='left_ads_float' class="fix-ads">
         <div>
-            <a href='/pages' target='_blank'><img border='0' height='500px' src='/public/images/fptarena1.png' width='100px'/></a>
+            <a href='' target='_blank'><img border='0' height='500px' src='/public/images/fptarena1.png' width='100px'/></a>
         </div>
     </div>
     <div id='right_ads_float' class="fix-ads">
         <div>
-            <a href='/pages' target='_blank'><img border='0' height='500px;' src='/public/images/fptarena1.png'' width='100px'/></a>
+            <a href='' target='_blank'><img border='0' height='500px;' src='/public/images/fptarena1.png'' width='100px'/></a>
         </div>
-    </div>
+    </div> -->
         
 </html>
 

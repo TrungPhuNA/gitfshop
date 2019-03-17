@@ -1,5 +1,5 @@
 <?php
-session_start();
+@session_start();
 // goi file Function
 require_once __DIR__ .'/../vendor/init.php';
 

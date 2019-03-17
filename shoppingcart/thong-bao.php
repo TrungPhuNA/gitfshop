@@ -26,13 +26,13 @@
                     <div class="col-md-12">
                         <section class="box-main1" >
                         <div class="panel panel-primary">
-                            <div class="panel-heading"> Danh sách sản phẩm giỏ hàng </div>
+                            <div class="panel-heading"> Thông báo thanh toán </div>
                             <div class="panel-body">
                                 <p> <?= isset($_SESSION['thongbao']) ? $_SESSION['thongbao'] : ''?></p>
                             </div>
                             <div class="panel-footer">
                                 <div class="pull-right">
-                                    <a href="/pages" class="btn btn-xs btn-danger">Tiếp tục mua hàng </a>
+                                    <a href="/" class="btn btn-xs btn-danger">Tiếp tục mua hàng </a>
                                 </div>
                                 <div class="clearfix"></div>
                             </div>
