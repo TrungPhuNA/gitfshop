@@ -66,7 +66,7 @@
                                            <td style="width: 40%">
                                                <div style="width: 100%;max-height: 400px;overflow: scroll;"><?= $comment['cmt_content'] ?></div>
                                            </td>
-                                            <td style="width: 20%"><a target="_blank" href="/pages/chi-tiet-san-pham.php?id=<?= $comment['id_pro'] ?>" class="custome-btn"><?= $comment['prd_name'] ?></a></td>
+                                            <td style="width: 20%"><a target="_blank" href="/chi-tiet-san-pham.php?id=<?= $comment['id_pro'] ?>" class="custome-btn"><?= $comment['prd_name'] ?></a></td>
                                             <td>
                                                 <a href="delete.php?id=<?= $comment['id'] ?>" class="custome-btn btn-danger btn-xs delete" ><i class="fa fa-trash"></i> Trash </a>
                                             </td>

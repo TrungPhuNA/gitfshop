@@ -32,7 +32,7 @@
                     <div class="container-pluid">
                         <div class="container">
                             <div class="col-md-3" id="ft-about">
-                                <p> Tên tôi là ABC.</p>
+                                <p> Tên tôi là Nguyễn Mạnh Đình.</p>
                             </div>
                             <div class="col-md-3 box-footer" >
                                 <h3 class="tittle-footer"> Danh mục sản phẩm </h3>
@@ -70,9 +70,9 @@
                                 <h3 class="tittle-footer"> Liên hệ</h3>
                                 <ul>
                                     <li>
-                                        <p><i class="fa fa-home" style="font-size: 16px;padding-right: 5px;"></i> 378 Quang Trung Hà Đông - Hà Nội</p>
-                                        <p><i class="sp-ic fa fa-mobile" style="font-size: 22px;padding-right: 5px;"></i> 12121</p>
-                                        <p><i class="sp-ic fa fa-envelope" style="font-size: 13px;padding-right: 5px;"></i>12121@gmail.com</p>
+                                        <p><i class="fa fa-home" style="font-size: 16px;padding-right: 5px;"></i> Số 52 Ngách 169 Cầu Giấy Hà Nội</p>
+                                        <p><i class="sp-ic fa fa-mobile" style="font-size: 22px;padding-right: 5px;"></i> 0375521139</p>
+                                        <p><i class="sp-ic fa fa-envelope" style="font-size: 13px;padding-right: 5px;"></i>0375521139@gmail.com</p>
                                     </li>
                                 </ul>
                             </div>
@@ -88,12 +88,12 @@
             </div>      
         </div>
 
-        <div class="qc__left" style="position: fixed;left: 40px; top: 30%;">
-            <a href=""><img src="/public/images/banner1.png"></a>
-        </div>
-        <div class="qc__right" style="position: fixed;right: 40px; top: 30%;">
-            <a href=""><img src="/public/images/banner1.png"></a>
-        </div>
+<!--        <div class="qc__left" style="position: fixed;left: 40px; top: 30%;">-->
+<!--            <a href=""><img src="/public/images/banner1.png"></a>-->
+<!--        </div>-->
+<!--        <div class="qc__right" style="position: fixed;right: 40px; top: 30%;">-->
+<!--            <a href=""><img src="/public/images/banner1.png"></a>-->
+<!--        </div>-->
     <script  src="/public/frontend/js/slick.min.js"></script>
     <script  src="/public/frontend/js/app.js"></script>
     <script  src="/public/app/js/notify.js"></script>

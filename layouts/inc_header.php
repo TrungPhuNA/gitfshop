@@ -3,7 +3,7 @@
         <div class="container">
             <div class="row clearfix">
                 <div class="col-md-6" id="header-text">
-                    <a>Nguyễn Văn A</a><b> Mã SV : 11111111 </b>
+                    <a>Nguyễn Mạnh Đình</a><b> Mã SV : 1421050043 </b>
                 </div>
                 <div class="col-md-6">
                     <nav id="header-nav-top">
@@ -106,7 +106,7 @@
                     </div>
                     <div class="pull-right">
                         <p id="hotline">Liên Hệ</p>
-                        <p>11111111</p>
+                        <p>0375521139</p>
                     </div>
 
                 </div>
