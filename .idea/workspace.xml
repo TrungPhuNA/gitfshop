@@ -2,32 +2,9 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="430a972e-a7cd-4228-8060-b80e3ec5ad5e" name="Default" comment="">
+      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/admin/layouts/inc_footer.php" beforeDir="false" afterPath="$PROJECT_DIR$/admin/layouts/inc_footer.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/admin/layouts/inc_header.php" beforeDir="false" afterPath="$PROJECT_DIR$/admin/layouts/inc_header.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/admin/modules/cate-products/add.php" beforeDir="false" afterPath="$PROJECT_DIR$/admin/modules/cate-products/add.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/admin/modules/cate-products/update.php" beforeDir="false" afterPath="$PROJECT_DIR$/admin/modules/cate-products/update.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/admin/modules/categories/add.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/admin/modules/categories/delete.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/admin/modules/categories/index.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/admin/modules/categories/update.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/autoload.php" beforeDir="false" afterPath="$PROJECT_DIR$/autoload.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/chi-tiet-san-pham.php" beforeDir="false" afterPath="$PROJECT_DIR$/chi-tiet-san-pham.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/config.php" beforeDir="false" afterPath="$PROJECT_DIR$/config.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/danh-muc-san-pham.php" beforeDir="false" afterPath="$PROJECT_DIR$/danh-muc-san-pham.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/index.php" beforeDir="false" afterPath="$PROJECT_DIR$/index.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/layouts/inc_footer.php" beforeDir="false" afterPath="$PROJECT_DIR$/layouts/inc_footer.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/layouts/inc_head.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/layouts/inc_header.php" beforeDir="false" afterPath="$PROJECT_DIR$/layouts/inc_header.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/layouts/inc_left.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/layouts/inc_menu.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/frontend/css/style.css" beforeDir="false" afterPath="$PROJECT_DIR$/public/frontend/css/style.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/frontend/images/slide/dell1.jpg" beforeDir="false" afterPath="$PROJECT_DIR$/public/frontend/images/slide/dell1.jpg" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/frontend/images/slide/sl1.jpg" beforeDir="false" afterPath="$PROJECT_DIR$/public/frontend/images/slide/sl1.jpg" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/frontend/images/slide/sl2.jpg" beforeDir="false" afterPath="$PROJECT_DIR$/public/frontend/images/slide/sl2.jpg" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/frontend/images/slide/sl3.jpg" beforeDir="false" afterPath="$PROJECT_DIR$/public/frontend/images/slide/sl3.jpg" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/user/profile.php" beforeDir="false" afterPath="$PROJECT_DIR$/user/profile.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/vendor/Helpers/Function.php" beforeDir="false" afterPath="$PROJECT_DIR$/vendor/Helpers/Function.php" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -102,7 +79,7 @@
       <workItem from="1543836288142" duration="1135000" />
       <workItem from="1544788770613" duration="2573000" />
       <workItem from="1544796814043" duration="262000" />
-      <workItem from="1578458023473" duration="3957000" />
+      <workItem from="1578458023473" duration="4326000" />
     </task>
     <servers />
   </component>

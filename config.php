@@ -12,8 +12,12 @@ define("UPLOADS", $_SERVER['DOCUMENT_ROOT'] ."/public/uploads/");
 // config database
 define("LOCALHOST","localhost");
 define("USER","root");
-define("PASS","root");
-define("DATABASE","doantotnghiep_webmaytinh");
+define("PASS","UGgy6G2VBabLLJ");
+define("DATABASE","doantotnghiep_giftshop");
+
+//define("PASS","root");
+//define("DATABASE","doantotnghiep_webmaytinh");
+
 
 
 // Config thông tin website
