@@ -10,7 +10,7 @@ define("UPLOADS", $_SERVER['DOCUMENT_ROOT'] ."/public/uploads/");
 
 
 // config database
-define("LOCALHOST","localhost");
+define("LOCALHOST","127.0.0.1");
 define("USER","root");
 define("PASS","UGgy6G2VBabLLJ");
 define("DATABASE","doantotnghiep_giftshop");

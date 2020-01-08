@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="430a972e-a7cd-4228-8060-b80e3ec5ad5e" name="Default" comment="">
-      <change beforePath="$PROJECT_DIR$/.htaccess" beforeDir="false" afterPath="$PROJECT_DIR$/.htaccesssssss" afterDir="false" />
+    <list default="true" id="430a972e-a7cd-4228-8060-b80e3ec5ad5e" name="Default" comment="adada">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/config.php" beforeDir="false" afterPath="$PROJECT_DIR$/config.php" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -78,8 +78,16 @@
       <workItem from="1543836288142" duration="1135000" />
       <workItem from="1544788770613" duration="2573000" />
       <workItem from="1544796814043" duration="262000" />
-      <workItem from="1578458023473" duration="4434000" />
+      <workItem from="1578458023473" duration="4663000" />
     </task>
+    <task id="LOCAL-00001" summary="adada">
+      <created>1578464176870</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1578464176874</updated>
+    </task>
+    <option name="localTasksCounter" value="2" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -97,6 +105,7 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <option name="LAST_COMMIT_MESSAGE" value="" />
+    <MESSAGE value="adada" />
+    <option name="LAST_COMMIT_MESSAGE" value="adada" />
   </component>
 </project>
