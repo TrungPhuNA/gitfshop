@@ -2,41 +2,9 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="430a972e-a7cd-4228-8060-b80e3ec5ad5e" name="Default" comment="adada">
-      <change afterPath="$PROJECT_DIR$/.idea/composerJson.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/admin/layouts/inc_sidebar.php" beforeDir="false" afterPath="$PROJECT_DIR$/admin/layouts/inc_sidebar.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/admin/modules/cate-posts/add.php" beforeDir="false" afterPath="$PROJECT_DIR$/admin/modules/producer/add.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/admin/modules/cate-posts/delete.php" beforeDir="false" afterPath="$PROJECT_DIR$/admin/modules/producer/delete.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/admin/modules/cate-posts/index.php" beforeDir="false" afterPath="$PROJECT_DIR$/admin/modules/producer/index.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/admin/modules/cate-posts/update.php" beforeDir="false" afterPath="$PROJECT_DIR$/admin/modules/producer/update.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/admin/modules/cate-products/update.php" beforeDir="false" afterPath="$PROJECT_DIR$/admin/modules/cate-products/update.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/admin/modules/comments/delete.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/admin/modules/comments/index.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/admin/modules/feedback/delete.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/admin/modules/feedback/index.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/admin/modules/modules/add.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/admin/modules/modules/delete.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/admin/modules/modules/index.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/admin/modules/modules/update.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/admin/modules/posts/add.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/admin/modules/posts/delete.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/admin/modules/posts/index.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/admin/modules/posts/update.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/admin/modules/products/add.php" beforeDir="false" afterPath="$PROJECT_DIR$/admin/modules/products/add.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/admin/modules/products/update.php" beforeDir="false" afterPath="$PROJECT_DIR$/admin/modules/products/update.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/autoload.php" beforeDir="false" afterPath="$PROJECT_DIR$/autoload.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/chi-tiet-san-pham.php" beforeDir="false" afterPath="$PROJECT_DIR$/chi-tiet-san-pham.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/admin/index.php" beforeDir="false" afterPath="$PROJECT_DIR$/admin/index.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/config.php" beforeDir="false" afterPath="$PROJECT_DIR$/config.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/da_bangiay.sql" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/danh-muc-san-pham.php" beforeDir="false" afterPath="$PROJECT_DIR$/danh-muc-san-pham.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/gioi-thieu.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/gui-phan-hoi.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/layouts/inc_footer.php" beforeDir="false" afterPath="$PROJECT_DIR$/layouts/inc_footer.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/layouts/inc_header.php" beforeDir="false" afterPath="$PROJECT_DIR$/layouts/inc_header.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lien-he.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/note.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/tim-kiem.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/tin-tuc.php" beforeDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -114,7 +82,7 @@
       <workItem from="1544788770613" duration="2573000" />
       <workItem from="1544796814043" duration="262000" />
       <workItem from="1578458023473" duration="5242000" />
-      <workItem from="1578472158425" duration="5503000" />
+      <workItem from="1578472158425" duration="5920000" />
     </task>
     <task id="LOCAL-00001" summary="adada">
       <created>1578464176870</created>
