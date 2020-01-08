@@ -66,7 +66,8 @@ if( ! function_exists( 'baseServerName'))
     // duong dan url ban dau
     function baseServerName()
     {
-        return 'http://'.$_SERVER["SERVER_NAME"];
+        return 'http://localhost:9999/';
+//        return 'http://'.$_SERVER["SERVER_NAME"];
     }
 }
 

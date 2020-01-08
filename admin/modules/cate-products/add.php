@@ -141,7 +141,7 @@
                                             <div class="form-group">
                                                 <label for="" class="col-sm-2 control-label"> Sort </label>
                                                 <div class="col-sm-3">
-                                                    <input type="number" name="cpr_sort" class="form-control" value="">
+                                                    <input type="number" name="cpr_sort" class="form-control" value="0">
                                                 </div>
                                                 <label for="" class="col-sm-2 control-label">Icon</label>
                                                 <div class="col-sm-5">

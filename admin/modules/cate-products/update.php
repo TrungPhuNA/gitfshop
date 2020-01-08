@@ -6,6 +6,7 @@
     $id = (int)Input::get('id');
 
     $cate = DB::fetchOne('category_products',$id);
+    // var_dump($cate);die;
     
     // kiem tra neu ko ton tai danh muc thi chuyen ve trang danh sach danh muc  
     if( ! $cate )

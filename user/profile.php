@@ -195,7 +195,7 @@
                                         <div class="form-group">
                                             <div class="col-sm-offset-4 col-sm-3">
                                                 <button type="submit" class="btn btn-primary btn-xs"> Cập nhật </button>
-                                                <a href="/pages/" class="btn btn-danger btn-xs"> Huỷ bỏ  </a>
+                                                <a href="/" class="btn btn-danger btn-xs"> Huỷ bỏ  </a>
                                             </div>
                                         </div>
                                     </form>
