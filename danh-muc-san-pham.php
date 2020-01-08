@@ -5,8 +5,16 @@ $idcate       = (int)Input::get('id');
 $filter['id'] = $idcate;
 $sql          = "SELECT products.* , category_products.cpr_name FROM products 
         LEFT JOIN category_products ON category_products.id = products.prd_category_product_id
-        WHERE 1 and products.prd_category_product_id = " . $idcate . "
-    ";
+        WHERE 1 ";
+
+if ($idcate) {
+    $sql .= "and products.prd_category_product_id = " . $idcate ." ";
+}
+$idProducer = (int)Input::get('producer');
+if ($idProducer) {
+	$sql .= "and products.prd_producer_id = " . $idProducer ." ";
+}
+
 
 if (Input::get('price')) {
 	$key = Input::get('price');

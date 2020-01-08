@@ -4,6 +4,7 @@
     require_once __DIR__ .'/../../autoload.php';
     $id = (int)Input::get('id');
     $product = DB::fetchOne('products',$id);
+    $producers = DB::query('producers');
     if( ! $product )
     {
         $_SESSION['error'] = "  Không tồn tại dữ liệu ";
@@ -20,16 +21,18 @@
          */
 
 
-        $name     = Input::get("prd_name");
-        $cate       = Input::get("prd_category_product_id");
-        $keywords   = Input::get("prd_keywords");
-        $description     = Input::get("prd_description");
-        $hot = Input::get('prd_hot');
-        $active  = Input::get('prd_active');
-        $number  = Input::get('prd_number');
-        $sale  = Input::get('prd_sale');    
-        $content  = Input::get('prd_content');
-        $price  = Input::get('prd_price');
+		$name        = Input::get("prd_name");
+		$cate        = Input::get("prd_category_product_id");
+		$keywords    = Input::get("prd_keywords");
+		$description = Input::get("prd_description");
+		$hot         = Input::get('prd_hot');
+		$active      = Input::get('prd_active');
+		$number      = Input::get('prd_number');
+		$sale        = Input::get('prd_sale');
+		$content     = Input::get('prd_content');
+		$price       = Input::get('prd_price');
+		$prod        = Input::get('producer');
+
         // bat loi 
         $errors['name'] = $name == '' ? 'Mời bạn điền đầy đủ thông tin' : null;  
         $errors['cate'] = $cate == '' ? 'Mời bạn điền đầy đủ thông tin' : null;
@@ -38,6 +41,8 @@
         $errors['number'] = $number == '' ? 'Mời bạn điền đầy đủ thông tin' : null;
         $errors['content'] = $content == '' ? 'Mời bạn điền đầy đủ thông tin' : null;
         $errors['price'] = $price == '' ? 'Mời bạn điền đầy đủ thông tin' : null;
+		$errors['prod'] = $prod == '' ? 'Mời bạn điền đầy đủ thông tin' : null;
+
         if ( isset ($_FILES['prd_thunbar']) && $_FILES['prd_thunbar']['name'] != NULL )
         {
             $file_name = $_FILES['prd_thunbar']['name'];
@@ -75,6 +80,7 @@
                 'prd_content'                => $content,
                 'prd_price'                  => $price,
                 'prd_sale'                   => $sale,
+				'prd_producer_id'            => $prod,
                 'prd_thunbar'                => $hinhanh ?? $product['prd_thunbar']
             ];
     
@@ -92,14 +98,14 @@
                 }
                 
                 $_SESSION['success'] = "Cập nhật thành công ";
-                header("Location: ".baseServerName().'/admin/modules/products');exit();
+                header("Location: ".baseServerName().'/admin/modules/products/');exit();
             }
             else 
             {
                 // gán session thông báo thất bại
                 // giữ nguyên trang để nhập lai
                 $_SESSION['error'] = "Cập nhật thất bại  ";
-                header("Location: ".baseServerName().'/admin/modules/products');exit();
+                header("Location: ".baseServerName().'/admin/modules/products/');exit();
                 _dd("DIE");
             }
         }
@@ -174,6 +180,22 @@
                                                     <?php if( isset( $errors['cate']) ): ?>
                                                         <span class="color-red"><i class="fa fa-bug"></i><?= $errors['cate'] ?></span>
                                                     <?php endif ; ?>
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
+                                                <label class="col-sm-2 control-label"> Nhà sản xuất </label>
+                                                <div class="col-sm-10">
+                                                    <select class="form-control" name="producer">
+                                                        <option value=""> - Chọn   - </option>
+														<?php if(count($producers) > 0) :?>
+															<?php foreach($producers as $producer) :?>
+                                                                <option value="<?= $producer['id'] ?>" <?= $product['prd_producer_id'] == $producer['id'] ? 'selected="selected"' : '' ?> ><?php echo $producer['name'] ?></option>
+															<?php endforeach ;?>
+														<?php endif; ?>
+                                                    </select>
+													<?php if( isset( $errors['prod']) ): ?>
+                                                        <span class="color-red"><i class="fa fa-bug"></i><?= $errors['prod'] ?></span>
+													<?php endif ; ?>
                                                 </div>
 
                                             </div>

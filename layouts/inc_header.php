@@ -71,6 +71,7 @@
                         <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
                            data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">PRODUCTS</a>
                         <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                            <a href="<?= baseServerName() ?>danh-muc-san-pham.php" class="dropdown-item">View All</a>
                             <?php foreach($categories as $item) :?>
                                 <a class="dropdown-item"
                                    href="<?= baseServerName() ?>danh-muc-san-pham.php?id=<?= $item['id'] ?>">
@@ -82,12 +83,12 @@
                         <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
                            data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">BRANDS</a>
                         <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                            <a class="dropdown-item" href="#">Montblanc</a>
-                            <a class="dropdown-item" href="#">Georg Jensen</a>
-                            <a class="dropdown-item" href="#">Swarovski</a>
-                            <a class="dropdown-item" href="#">RayBan</a>
-                            <a class="dropdown-item" href="#">Saint Laurent</a>
-                            <a class="dropdown-item" href="#">Gucci</a>
+                            <a href="<?= baseServerName() ?>danh-muc-san-pham.php" class="dropdown-item">View All</a>
+							<?php foreach($producers as $item) :?>
+                                <a class="dropdown-item"
+                                   href="<?= baseServerName() ?>danh-muc-san-pham.php?producer=<?= $item['id'] ?>">
+									<?= $item['name'] ?></a>
+							<?php endforeach;?>
                         </div>
                     </li>
                     <li class="nav-item">

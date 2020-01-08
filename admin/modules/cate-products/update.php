@@ -141,7 +141,7 @@
                                                 <div class="col-sm-3">
                                                     <div class="radio">
                                                         <label>
-                                                        <input type="radio" name="cpr_hot" id="optionsRadios1" value="" <?= $cate['cpr_hot'] == 1 ? "checked='checked'" : '' ?>>
+                                                        <input type="radio" name="cpr_hot" id="optionsRadios1" value="1" <?= $cate['cpr_hot'] == 1 ? "checked='checked'" : '' ?>>
                                                         Có
                                                         </label>
                                                     </div>

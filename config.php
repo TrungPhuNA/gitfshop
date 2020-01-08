@@ -12,11 +12,11 @@ define("UPLOADS", $_SERVER['DOCUMENT_ROOT'] ."/public/uploads/");
 // config database
 define("LOCALHOST","127.0.0.1");
 define("USER","root");
-define("PASS","UGgy6G2VBabLLJ");
-define("DATABASE","doantotnghiep_giftshop");
+//define("PASS","UGgy6G2VBabLLJ");
+//define("DATABASE","doantotnghiep_giftshop");
 
-//define("PASS","root");
-//define("DATABASE","doantotnghiep_webmaytinh");
+define("PASS","root");
+define("DATABASE","doantotnghiep_webmaytinh");
 
 
 

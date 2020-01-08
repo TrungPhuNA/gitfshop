@@ -6,23 +6,26 @@
     //load danh muc san pham
     $catePro = DB::query('category_products');
 
+    $producers = DB::query('producers');
+
     // kiem tra neu submit 
     if($_SERVER['REQUEST_METHOD'] == 'POST')
     {
         /**
          *  lay giá trị từ input
          */
-        $name     = Input::get("prd_name");
-        $cate       = Input::get("prd_category_product_id");
-        $keywords   = Input::get("prd_keywords");
-        $description     = Input::get("prd_description");
-        $hot = Input::get('prd_hot');
-        $active  = Input::get('prd_active');
-        $number  = Input::get('prd_number');
-        $sale  = Input::get('prd_sale');    
-        $content  = Input::get('prd_content');
-        $price  = Input::get('prd_price');
-        // bat loi 
+		$name        = Input::get("prd_name");
+		$cate        = Input::get("prd_category_product_id");
+		$keywords    = Input::get("prd_keywords");
+		$description = Input::get("prd_description");
+		$hot         = Input::get('prd_hot');
+		$active      = Input::get('prd_active');
+		$number      = Input::get('prd_number');
+		$sale        = Input::get('prd_sale');
+		$content     = Input::get('prd_content');
+		$price       = Input::get('prd_price');
+		$prod        = Input::get('producer');
+        // bat loi
         $errors['name'] = $name == '' ? 'Mời bạn điền đầy đủ thông tin' : null;  
         $errors['cate'] = $cate == '' ? 'Mời bạn điền đầy đủ thông tin' : null;
         $errors['keywords'] = $keywords == '' ? 'Mời bạn điền đầy đủ thông tin' : null;
@@ -30,6 +33,7 @@
         $errors['number'] = $number == '' ? 'Mời bạn điền đầy đủ thông tin' : null;
         $errors['content'] = $content == '' ? 'Mời bạn điền đầy đủ thông tin' : null;
         $errors['price'] = $price == '' ? 'Mời bạn điền đầy đủ thông tin' : null;
+        $errors['prod'] = $prod == '' ? 'Mời bạn điền đầy đủ thông tin' : null;
         if ( isset ($_FILES['prd_thunbar']) && $_FILES['prd_thunbar']['name'] != NULL )
         {
             $file_name = $_FILES['prd_thunbar']['name'];
@@ -69,7 +73,8 @@
                 'prd_content'                => $content,
                 'prd_price'                  => $price,
                 'prd_sale'                   => $sale,
-                'prd_thunbar'                => $hinhanh
+                'prd_thunbar'                => $hinhanh,
+                'prd_producer_id'            => $prod
             ];
             //tiến hành insert 
             $id_insert = DB::insert('products',$data);
@@ -159,6 +164,23 @@
                                                     </select>
                                                     <?php if( isset( $errors['cate']) ): ?>
                                                         <span class="color-red"><i class="fa fa-bug"></i><?= $errors['cate'] ?></span>
+                                                    <?php endif ; ?>
+                                                </div>
+
+                                            </div>
+                                            <div class="form-group">
+                                                <label class="col-sm-2 control-label"> Nhà sản xuất </label>
+                                                <div class="col-sm-10">
+                                                    <select class="form-control" name="producer">
+                                                        <option value=""> - Chọn   - </option>
+                                                        <?php if(count($producers) > 0) :?>
+                                                            <?php foreach($producers as $producer) :?>
+                                                                <option value="<?= $producer['id'] ?>" <?= isset($prod) && $prod == $producer['id'] ? 'selected="selected"' : '' ?> ><?php echo $producer['name'] ?></option>
+                                                            <?php endforeach ;?>
+                                                        <?php endif; ?>
+                                                    </select>
+                                                    <?php if( isset( $errors['prod']) ): ?>
+                                                        <span class="color-red"><i class="fa fa-bug"></i><?= $errors['prod'] ?></span>
                                                     <?php endif ; ?>
                                                 </div>
 

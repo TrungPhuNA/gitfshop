@@ -129,6 +129,10 @@
         </p>
         <small class="text-secondary py-4">Shop Online © 2019 Shop Online. All Rights Reserved. Designed by Shop
             Online</small>
+        <p>
+            This is an email link:
+            <a href="mailto:phupt.humg.94@gmail.com" target="_top">Send Mail</a>
+        </p>
     </div>
 
 </footer>

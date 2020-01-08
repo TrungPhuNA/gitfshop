@@ -1,3 +1,0 @@
-Link admin : http://basephp.loca/authenticate/login.php
-               ID : admin12345@gmail.com
-               Pass : admin12345

@@ -3,25 +3,13 @@
     $id = (int)Input::get('id');
     // lay chi tiet san pham
 
-    $sql_product_detaul = "SELECT products.*, category_products.cpr_name FROM products LEFT JOIN 
-        category_products ON category_products.id = products.prd_category_product_id WHERE 1 and prd_active = 1
+    $sql_product_detaul = "SELECT products.*, category_products.cpr_name as cateName, producers.name as producersName FROM products LEFT JOIN 
+         producers ON producers.id = products.prd_producer_id
+         LEFT JOIN  category_products ON category_products.id = products.prd_category_product_id
+         WHERE 1 and prd_active = 1
      and  products.id = ".$id;
     $product_defail = DB::fetchsql($sql_product_detaul);
     $product = $product_defail[0];
-
-
-    // check dang nhap 
-    // kiem tra dang nhap
-    if (isset($_SESSION['id_user']))
-    {
-        $user = DB::fetchOne('users' , (int)$_SESSION['id_user']);
-    }
-
-    // lấy danh sách comment của sản phẩm 
-    $sql  = "SELECT comments.* , users.avatar as avatar FROM comments 
-        LEFT JOIN users ON users.id = comments.cmt_user_id WHERE 1  AND cmt_product_id = ".$id." ORDER BY ID DESC lIMIT 6
-    ";
-
 
     // tinh luot view
     if ( !isset($_COOKIE['view_product'.$id]))
@@ -31,9 +19,12 @@
     }
 
     // sản phẩm liên quan
-    $sqlProductSuggest = "SELECT * FROM products WHERE 1 AND prd_active = 1 and prd_category_product_id = ". $product['prd_category_product_id'] ."
+    $sqlProductSuggest = "SELECT products.*,category_products.cpr_name as cateName  FROM products LEFT JOIN 
+        category_products ON category_products.id = products.prd_category_product_id
+     WHERE 1 AND prd_active = 1 and prd_category_product_id = ". $product['prd_category_product_id'] ."
       ORDER BY ID DESC LIMIT 6";
-    $productSuggest = DB::fetchsql($sqlProductHot);
+    $productSuggest = DB::fetchsql($sqlProductSuggest);
+
 ?>
 <?php
 require "layouts/inc_header.php";
@@ -149,5 +140,38 @@ require "layouts/inc_header.php";
         </div>
     </div>
 	<?php endif ;?>
+
+    <div class="container">
+        <div class="row">
+            <h2>So sánh sản phẩm cùng danh mục</h2>
+            <table class="table table-hover">
+                <thead>
+                <tr>
+                    <td>Hình ảnh</td>
+                    <td>Giá</td>
+                    <td>Phân Loại</td>
+                    <td>Hãng sản xuất</td>
+                    <td>Sale</td>
+                    <td>Mô tả</td>
+                </tr>
+
+                </thead>
+                <tbody>
+                    <?php foreach ($productSuggest as $item) :?>
+                        <tr>
+                            <td>
+                                <img style="width: 100px;height: 80px;" src="<?= baseServerName() ?>public/uploads/products/<?= $item['prd_thunbar'] ?>" class="img-fluid" alt="Image 1" />
+                            </td>
+                            <td><?= formatPrice($item['prd_price']) ?></td>
+                            <td><a href="javascript:;void(0)" class="label label-success"><?= $item['cateName'] ?></a></td>
+                            <td><a href="javascript:;void(0)" class="label label-success"><?= $item['producersName'] ?></a></td>
+                            <td><b><?= $item['prd_sale'] ?> %</b></td>
+                            <td><p><?= $item['prd_description'] ?></p></td>
+                        </tr>
+	                <?php endforeach;?>
+                </tbody>
+            </table>
+        </div>
+    </div>
 <main>
 <?php require "layouts/inc_footer.php"; ?>

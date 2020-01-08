@@ -27,4 +27,6 @@
     // san pham noi bat 
     $sqlProductHot = "SELECT * FROM products WHERE 1 AND prd_active = 1 and prd_hot = 1  ORDER BY ID DESC LIMIT 6";
     $productHot = DB::fetchsql($sqlProductHot);
+
+	$producers = DB::query('producers');
 ?>

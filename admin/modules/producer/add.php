@@ -1,7 +1,52 @@
 <?php
-    $modules = 'cate-posts';
-    $title_global = ' Thêm mới danh mục bài viết ';
+    $modules = 'producer';
+    $title_global = ' Hãng sản xuất ';
     require_once __DIR__ .'/../../autoload.php';
+
+if($_SERVER['REQUEST_METHOD'] == 'POST')
+{
+	/**
+	 *  lay giá trị từ input
+	 */
+	$name            = Input::get("name");
+
+	// bat loi
+	$errors['name']          = $name == '' ? 'Mời bạn điền đầy đủ thông tin' : null;
+
+	//  chuyen doi mang chi muc - loai bo key trung nhau
+	if( isset ($errors ))
+	{
+		$errors = (array_unique(array_values($errors)));
+	}
+
+	// neu bien errors  thi ko co loi tien hanh insert
+	if ( count($errors) == 1)
+	{
+		// gán vào 1 mảng giá trị để insertt
+		$data =
+			[
+				'name'                   => $name
+			];
+
+		//tiến hành insert
+		$id_insert = DB::insert('producers',$data);
+
+		if($id_insert > 0)
+		{
+			// insert thanh cong
+			// gán session thông báo thành công
+			//chuyển về trang index trong thư mục category_products
+			$_SESSION['success'] = "Thêm mới thành công ";
+			header("Location: ".baseServerName().'/admin/modules/producer/');exit();
+		}
+		else
+		{
+			// gán session thông báo thất bại
+			// giữ nguyên trang để nhập lai
+		}
+	}
+}
+
 ?>
 
 <!DOCTYPE html>
@@ -44,38 +89,17 @@
                                 <p><span class="color-red">(*)</span> Những trường ngày bắt buộc phải nhập  | </p>
                                 <div class="box box-primary">
                                     <form class="form-horizontal" action="" method="post" enctype="multipart/form-data">
-                                        <input type="hidden" name="_token" value="ZPEdLE4Il64joczf4kmj8Q9eQBvPxcz1qVZwfLOB">
                                         <div class="box-body">
 
                                             <div class="form-group">
                                                 <label for="inputEmail3" class="col-sm-2 control-label"> Name <span class="color-red">(*)</span> </label>
                                                 <div class="col-sm-10">
-                                                    <input type="text" class="form-control" name="name"  placeholder="VD Nguyễn Văn A" autocomplete="off" value="<?= isset($name) ? $name : '' ?>">
+                                                    <input type="text" class="form-control" name="name"  placeholder="" autocomplete="off" value="<?= isset($name) ? $name : '' ?>">
                                                     <?php if(isset($errors['name'])) :?>
                                                         <span class="color-red"><i class="fa fa-bug"></i><?= $errors['name'] ?></span>
                                                     <?php endif ;?>
                                                 </div>
                                             </div>
-
-                                            <div class="form-group is-empty">
-                                                <label for="name" class="col-md-2 control-label"> Email <span class="color-red">(*)</span> </label>
-                                                <div class="col-md-10">
-                                                    <input type="text" class="form-control" name="email" id="name" value="<?= isset($email) ? $email : '' ?>" autocomplete="off" placeholder=" VD nguyenvana@gmail.com ">
-                                                    <?php if(isset($errors['email'])) :?>
-                                                        <span class="color-red"><i class="fa fa-bug"></i><?= $errors['email'] ?></span>
-                                                    <?php endif ;?>
-                                                </div>
-                                            </div>
-                                            <div class="form-group is-empty">
-                                                <label for="name" class="col-md-2 control-label"> Password <span class="color-red">(*)</span> </label>
-                                                <div class="col-md-10">
-                                                    <input type="password" class="form-control" name="password"  value="<?= isset($password) ? $password : '' ?>" autocomplete="off" placeholder=" VD nguyenvana1234 ">
-                                                    <?php if(isset($errors['password'])) :?>
-                                                        <span class="color-red"><i class="fa fa-bug"></i><?= $errors['password'] ?></span>
-                                                    <?php endif ;?>
-                                                </div>
-                                            </div>
-
                                         </div>
                                         <!-- /.box-body -->
                                         <div class="box-footer col-sm-offset-2">
