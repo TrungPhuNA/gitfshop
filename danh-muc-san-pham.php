@@ -12,6 +12,7 @@ if ($idcate) {
 }
 $idProducer = (int)Input::get('producer');
 if ($idProducer) {
+    $filter['producer'] = $idProducer;
 	$sql .= "and products.prd_producer_id = " . $idProducer ." ";
 }
 
@@ -52,6 +53,9 @@ $products = Pagination::pagination('products', $sql, 'page', 12);
                 </div>
             </div>
 		<?php endforeach;?>
+         <div>
+            <?= Pagination::getListpage($filter) ?>
+        </div>
     </div>
 <?php endif ;?>
 <?php require "layouts/inc_footer.php"; ?>

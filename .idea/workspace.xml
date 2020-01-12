@@ -3,8 +3,6 @@
   <component name="ChangeListManager">
     <list default="true" id="430a972e-a7cd-4228-8060-b80e3ec5ad5e" name="Default" comment="adada">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/admin/index.php" beforeDir="false" afterPath="$PROJECT_DIR$/admin/index.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/config.php" beforeDir="false" afterPath="$PROJECT_DIR$/config.php" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -82,7 +80,7 @@
       <workItem from="1544788770613" duration="2573000" />
       <workItem from="1544796814043" duration="262000" />
       <workItem from="1578458023473" duration="5242000" />
-      <workItem from="1578472158425" duration="5920000" />
+      <workItem from="1578472158425" duration="6450000" />
     </task>
     <task id="LOCAL-00001" summary="adada">
       <created>1578464176870</created>
